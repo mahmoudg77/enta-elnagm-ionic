@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{"About"|translate}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="text-center">
+    <ion-img src="/assets/icon/favicon.png" style="width: 280px;margin: auto;"></ion-img>
+    <h2><a>{{"Enta Elnagm"|translate}}</a></h2>
+    <p>{{"Version"|translate}} : {{version||"1.0.1"}}</p>
+    <hr/>
+    <ion-button  (click)="onRateApp()">
+      {{"Rate"|translate}} 
+            <ion-icon name="star"></ion-icon>  
+            <ion-icon name="star"></ion-icon>  
+            <ion-icon name="star"></ion-icon>  
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star"></ion-icon>
+    </ion-button>
+    <hr/>
+    <a href="http://web-egy.com" color="primary">WEBEGY</a>
+  </ion-content>

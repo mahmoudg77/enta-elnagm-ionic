@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-back-button></ion-back-button>
+        </ion-buttons>
+    <ion-title>{{"Photos"|translate}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-slides pager="false" scrollbar="false">
+        <ion-slide *ngFor="let itm of gallery">
+            <ion-img [src]="itm" style="width:100%;height: 100%;"></ion-img>
+        </ion-slide>
+      </ion-slides>
+</ion-content>

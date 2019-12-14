@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{"News"|translate}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-card *ngFor="let post of posts">
+        <ion-card-content>
+           <div class="row">
+              <div class="col col-xs-3">
+                  <img [src]="post.image" />
+              </div>
+                <div class="col col-xs-9 text-left">
+                 <h2>{{post.title}} </h2>
+                 <p>{{post.description}}..</p><br/>
+                </div>
+           </div>
+           
+         </ion-card-content>
+      </ion-card>
+</ion-content>

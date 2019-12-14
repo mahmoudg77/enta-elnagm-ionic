@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{"Videos"|translate}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-slides pager="false" scrollbar="false">
+    <ion-slide *ngFor="let itm of gallery">
+      <iframe [src]="itm" frameborder="0" style="width:100%;height: 100%;"></iframe>
+    </ion-slide>
+  </ion-slides>
+</ion-content>

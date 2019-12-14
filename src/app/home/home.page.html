@@ -1,0 +1,94 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{"Enta Elnagm"|translate}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+    <ion-refresher slot="fixed" (ionRefresh)="ngOnInit($event)">
+        <ion-refresher-content
+          color="light"
+          pullingIcon="arrow-dropdown"
+          pullingText="{{'Pull to refresh'|translate}}"
+          refreshingSpinner="circles"
+          refreshingText="{{'Refreshing'|translate}}...">
+        </ion-refresher-content>
+      </ion-refresher>
+  <div id="slider">
+    <ion-slides pager="true" options="slideOpts"  class="homeslider">
+      <ion-slide *ngFor="let slide of slides" [ngStyle]="{'background-image':'url('+slide.image + ')'}">
+        <h2>{{slide.title}}</h2>
+      </ion-slide>
+    </ion-slides>
+    <div class="owl-nav">
+
+      <ion-button type="submit" class="owl-next" (click)="next()"><ion-icon name="arrow-forward"></ion-icon></ion-button>
+      <ion-button type="submit" class="owl-prev"  (click)="prev()"><ion-icon name="arrow-back"></ion-icon></ion-button>
+    </div>
+  </div>
+       <ion-card>
+         <ion-card-header>
+           <ion-card-subtitle>                    
+             <h2 class="text-center"><a>{{post.title}}</a></h2>
+            <hr/>
+          </ion-card-subtitle>
+         </ion-card-header>
+          <ion-card-content>
+              <div class="row">               
+                  <div class="col col-xs-12">
+                    <p>{{post.body}}</p>
+                  </div> 
+                  <div class="col col-xs-12 text-center">
+                      <a routerLink="/register" class="btn">{{"Register Now"|translate}}</a>
+                  </div> 
+                </div>
+        </ion-card-content>
+      </ion-card>
+     
+      <ion-slides mode="ios"  options="{effect: 'flip',slidesPerView: 1,
+            spaceBetween: 30,
+            pagination: {
+              el: '.swiper-pagination',
+              clickable: true,
+            },}" pager="ios" scrollbar="ios">
+        <ion-slide *ngFor="let cont of contests">
+          <ion-card >
+            <ion-card-content>
+               <div class="row" class="contests">
+                  <div class="col col-xs-5">
+                      <span class="talend">{{cont.talend}}</span>
+                      <img [src]="cont.image" />
+                  </div>
+                    <div class="col col-xs-7 text-left">
+                     <h2 class="name">{{cont.name}} </h2>
+                     <span class="age">{{cont.age}} Year</span><br/>
+                     <span class="city badge">{{cont.city}}</span>
+                       
+                       
+                    </div>
+               </div>
+               
+             </ion-card-content>
+          </ion-card>
+        </ion-slide>
+      </ion-slides>
+    
+
+<ion-fab vertical="bottom" horizontal="end">
+    <ion-fab-button >
+      <ion-icon name="call" style="color:#fff;font-size: 1.9em"></ion-icon>
+    </ion-fab-button>
+  
+    <ion-fab-list side="top">
+      <ion-fab-button (click)="openExternal('https://wa.me/'+whatsapp);">
+        <ion-icon name="logo-whatsapp" ></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button (click)="openExternal('tel://'+phone);">
+        <ion-icon name="call" ></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  
+  </ion-fab>
+
+ 
+</ion-content>

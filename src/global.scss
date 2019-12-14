@@ -1,0 +1,120 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+@import "theme/bootstrap.min.scss";
+// @import "theme/bootstrap-theme.min.scss";
+@import "theme/theme.scss";
+
+
+ion-content{
+    //--background-color:var(--ion-color-tertiary);
+    --background:#000000c7 ;//url('/assets/images/featured-slider-02.jpg') no-repeat center / auto 100% fixed;
+}
+ion-toolbar{
+    --background:var(--ion-color-primary);
+    --color:var(--ion-color-secondary)
+}
+ion-button{
+    --background:var(--ion-color-secondary);
+    --color:var(--ion-color-primary-contrast);
+    :hover{
+        --background:var(--ion-color-secondary-contrast);
+        --color:var(--ion-color-secondary)
+    }
+}
+ion-tab-bar{
+    --background:var(--ion-color-primary);
+    --color:var(--ion-color-secondary)
+}
+ion-list{
+    ion-header{
+        --background:var(--ion-color-primary);
+    }
+    ion-item{
+        --background:var(--ion-color-primary);
+
+    }
+}
+
+ion-slides.homeslider{
+    width: 100%;
+    height: 180px;
+    ion-slide{
+        background-size:100% 100%; 
+        background-repeat: no-repeat;
+    }
+}
+ion-fab{
+    position: fixed;
+    bottom: 50px;
+    ion-fab-list{
+        ion-fab-button{
+            --background:var(--ion-color-tertiary);
+            --color:var(--ion-color-secondary);
+        }
+    }
+    ion-fab-button{
+        --background:var(--ion-color-secondary);
+        //--color:var(--ion-color-primary-contrast);
+    }
+}
+
+ion-card,ion-card-header ,ion-card-content {
+    --background: #424040 !important;
+    --color:#fff !important;
+}
+ion-item {
+    --background: unset !important;
+}
+ion-card-header *{
+    --color:#fff !important;
+}
+
+hr{
+    background: var(--ion-color-secondary);
+    width: 50%;
+    height: 3px;
+    border-top:unset !important;
+}
+
+h4{
+    text-align: center;
+}
+.form-control {
+    background:#0008;
+    border: 1px solid#555;
+}
+
+.tab-selected {
+    background: #222;
+    color:#ff0078;
+}
+// .tap-selected{
+//     background:var(--ion-color-secondary);
+//     ion-lable,ion-icon{
+//         color:var(--ion-color-tertiary);
+//     }
+// }

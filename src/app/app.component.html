@@ -1,0 +1,33 @@
+<ion-app>
+  <ion-router-outlet></ion-router-outlet>
+  <ion-tabs >
+
+    <ion-tab-bar slot="bottom" color="primary">
+      <ion-tab-button tab="home" routerLinkActive="active">
+        <ion-icon name="home" color="secondary"></ion-icon>
+        <ion-label color="secondary">{{"Home"|translate}}</ion-label>
+      </ion-tab-button>
+  
+      <ion-tab-button tab="user-area"  routerLinkActive="active">
+        <ion-icon name="contact" color="secondary"></ion-icon>
+        <ion-label color="secondary">{{"Profile"|translate}}</ion-label>
+      </ion-tab-button>
+  
+      <ion-tab-button tab="gallery" routerLinkActive="active">
+        <ion-icon name="images" color="secondary"></ion-icon>
+        <ion-label color="secondary">{{"Gallery"|translate}}</ion-label>
+      </ion-tab-button>
+      <ion-tab-button tab="news" routerLinkActive="active">
+        <ion-icon name="globe" color="secondary"></ion-icon>
+        <ion-label color="secondary">{{"News"|translate}}</ion-label>
+      </ion-tab-button>
+      <ion-tab-button tab="about" routerLinkActive="active">
+        <ion-icon name="information-circle" color="secondary"></ion-icon>
+        <ion-label color="secondary">{{"About"|translate}}</ion-label>
+      </ion-tab-button>
+     
+    </ion-tab-bar>
+  
+  </ion-tabs>
+  
+</ion-app>

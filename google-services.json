@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "991952097357",
+    "firebase_url": "https://enta-elnagm.firebaseio.com",
+    "project_id": "enta-elnagm",
+    "storage_bucket": "enta-elnagm.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:991952097357:android:ec0d48fdac2c97d6688c04",
+        "android_client_info": {
+          "package_name": "com.webegy.entaelnagm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "991952097357-6kru2ga2niukl1ruf7hr1o9chrk9dont.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAduR3k20HafKX6me05-V8gX5nRx1Bw9Wo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "991952097357-6kru2ga2niukl1ruf7hr1o9chrk9dont.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
