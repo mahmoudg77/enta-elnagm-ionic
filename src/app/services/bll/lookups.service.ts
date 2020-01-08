@@ -10,28 +10,17 @@ export class LookupsService {
 
 
   getCountries(next:any=null,error:any=null){
-    this.api.getRequest("/Lookup/Countries","",data=>{if(next)next(data);},err=>{if(error)error(err);});
+    this.api.getRequest("/lookup/countries","",data=>{if(next)next(data);},err=>{if(error)error(err);});
   }
   getCities(country_id:number,next:any=null,error:any=null){
-    this.api.getRequest("/Lookup/Cities/"+ country_id,"",data=>{if(next)next(data);},err=>{if(error)error(err);});
+    this.api.getRequest("/countries/"+ country_id+"/cities","",data=>{if(next)next(data);},err=>{if(error)error(err);});
   }
-  getDeviceTypes(next:any=null,error:any=null){
-    this.api.getRequest("/Lookup/DeviceTypes","",data=>{if(next)next(data);},err=>{if(error)error(err);});
+  getCategories(next:any=null,error:any=null){
+    this.api.getRequest("/category/","",data=>{if(next)next(data);},err=>{if(error)error(err);});
   }
-  getMarks(next:any=null,error:any=null){
-    this.api.getRequest("/Lookup/Marks","",data=>{if(next)next(data);},err=>{if(error)error(err);});
+  getChields(id,next:any=null,error:any=null){
+    this.api.getRequest("/category/"+id+"/chields","",data=>{if(next)next(data);},err=>{if(error)error(err);});
   }
 
-  getMyDevices(next:any=null,error:any=null){
-    this.api.getRequest("/Lookup/MyDevices","",data=>{if(next)next(data);},err=>{if(error)error(err);});
-  }
-  getFollowStates(next:any=null,error:any=null){
-    this.api.getRequest("/Lookup/FollowStates","",data=>{if(next)next(data);},err=>{if(error)error(err);});
-  }
-  getOrderStates(next:any=null,error:any=null){
-    this.api.getRequest("/Lookup/OrderStates","",data=>{if(next)next(data);},err=>{if(error)error(err);});
-  }
-  getOrderSures(next:any=null,error:any=null){
-    this.api.getRequest("/Lookup/OrderSures","",data=>{if(next)next(data);},err=>{if(error)error(err);});
-  }
+  
 }

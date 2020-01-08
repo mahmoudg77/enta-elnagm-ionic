@@ -40,6 +40,10 @@ const routes: Routes = [
     path: 'forgetpassword',
     loadChildren: () => import('./forgetpassword/forgetpassword.module').then( m => m.ForgetpasswordPageModule)
   },
+  {
+    path: 'talent-profile',
+    loadChildren: () => import('./talent-profile/talent-profile.module').then( m => m.TalentProfilePageModule)
+  },
  
 ];
 @NgModule({

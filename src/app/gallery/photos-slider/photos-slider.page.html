@@ -8,9 +8,17 @@
 </ion-header>
 
 <ion-content>
-    <ion-slides pager="false" scrollbar="false">
-        <ion-slide *ngFor="let itm of gallery">
-            <ion-img [src]="itm" style="width:100%;height: 100%;"></ion-img>
-        </ion-slide>
-      </ion-slides>
+  <div id="slider">
+  
+    <ion-slides pager="false" scrollbar="false" style="height: 100%;">
+      <ion-slide *ngFor="let itm of gallery" style="height: 100%;vertical-align: middle;">
+        <ion-img [src]="itm.image.lg" style="width:100%;height: 100%;"></ion-img>
+      </ion-slide>
+    </ion-slides>
+    <div class="owl-nav">
+      
+      <ion-button type="submit" class="owl-next" [class.pull-right]="!shared.isRTL" [class.pull-left]="shared.isRTL" (click)="next()"><ion-icon name="arrow-forward"></ion-icon></ion-button>
+      <ion-button type="submit" class="owl-prev" [class.pull-right]="shared.isRTL" [class.pull-left]="!shared.isRTL" (click)="prev()"><ion-icon name="arrow-back"></ion-icon></ion-button>
+    </div>
+  </div>
 </ion-content>

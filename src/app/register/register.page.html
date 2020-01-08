@@ -6,37 +6,135 @@
   
   <ion-content>
     <ion-img src="/assets/icon/favicon.png" style="width: 280px;margin: auto;"></ion-img>
-    <ion-card>
-      <ion-card-header style="text-align: center;">
-        <ion-card-title>{{"Register"|translate}}</ion-card-title>
-        <ion-card-subtitle>{{"register-subtitle"|translate}}</ion-card-subtitle>
-      </ion-card-header>
-      <ion-card-content>
+ 
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
-            <ion-label>{{"Your phone"|translate}} <ion-text color="danger">*</ion-text></ion-label>
-            <ion-input required formControlName="phone" type="text"  class="form-control"></ion-input>
-             <ion-label  >{{"Your talent"|translate}} <ion-text color="danger">*</ion-text></ion-label>
-                <ion-select multiple="false" required formControlName="talent" placeholder="{{'Select One'|translate}} ..." class="form-control">
-                 <ion-select-option value="peperoni">Peperoni</ion-select-option>
-                 <ion-select-option value="hawaii">Hawaii</ion-select-option>
+          <ion-slides style="width:100%;">
+            <ion-slide>
+              <ion-card  style="width:100%;" > 
+                <ion-card-header style="text-align: center;">
+                  <ion-card-title>{{"Register"|translate}}</ion-card-title>
+                   <ion-card-subtitle>{{"Personal Info"|translate}}</ion-card-subtitle>
+                </ion-card-header>
+                <ion-card-content>
+                  <ion-label>{{"Your Name"|translate}} <ion-text color="danger">*</ion-text></ion-label>
+                <ion-input required formControlName="name" type="text"  class="form-control"></ion-input>
+
+                <ion-label>{{"Your phone"|translate}} <ion-text color="danger">*</ion-text></ion-label>
+                <ion-input required formControlName="phone" type="text"  class="form-control"></ion-input>
+                <ion-label>{{"Your email"|translate}} <ion-text color="danger">*</ion-text></ion-label>
+                <ion-input required formControlName="email" type="text"  class="form-control"></ion-input>
+                 <ion-label  >{{"Password"|translate}} <ion-text color="danger">*</ion-text></ion-label>
+                <ion-input required formControlName="password" type="password" class="form-control"></ion-input>
+                 <ion-label  >{{"Confirm Password"|translate}} <ion-text color="danger">*</ion-text></ion-label>
+                <ion-input required formControlName="cpassword" type="password" class="form-control"></ion-input>
+    
+                <ion-button expand="full"  (click)="next()">
+                  {{"Next"|translate}}
+                  <ion-icon slot="end" name="arrow-forward"></ion-icon>
+
+                </ion-button>
+                 </ion-card-content>
+              </ion-card>
+            </ion-slide>
+            <ion-slide>
+              <ion-card  style="width:100%;" > 
+                <ion-card-header>
+                   <ion-card-title>{{"Address Info"|translate}}</ion-card-title>
+                </ion-card-header>
+                <ion-card-content>
+               <div  style="width:100%">
+                <ion-label  >{{"Nationality"|translate}} <ion-text color="danger">*</ion-text></ion-label>
+                <ion-select multiple="false" required formControlName="nationality" placeholder="{{'Select One'|translate}} ..." class="form-control">
+                 <ion-select-option *ngFor="let itm of countries" [value]="itm.id">{{itm.name}}</ion-select-option>
                 </ion-select>
-              <ion-label>{{"Your email"|translate}} <ion-text color="danger">*</ion-text></ion-label>
-            <ion-input required formControlName="email" type="text"  class="form-control"></ion-input>
-             <ion-label  >{{"Password"|translate}} <ion-text color="danger">*</ion-text></ion-label>
-            <ion-input required formControlName="password" type="text" class="form-control"></ion-input>
-             <ion-label  >{{"Confirm Password"|translate}} <ion-text color="danger">*</ion-text></ion-label>
-            <ion-input required formControlName="cpassword" type="text" class="form-control"></ion-input>
-            <div class="row">
-              <div class="col col-xs-6"> 
-                <ion-button  type="submit" [disabled]="form.invalid">
-                    {{"Register"|translate}}
+
+                <ion-label  >{{"Country"|translate}} <ion-text color="danger">*</ion-text></ion-label>
+                <ion-select multiple="false"  (ionChange)="onCountryChange()" required formControlName="country" placeholder="{{'Select One'|translate}} ..." class="form-control">
+                  <ion-select-option *ngFor="let itm of countries" [value]="itm.id">{{itm.name}}</ion-select-option>
+                </ion-select>
+                
+                <ion-label  >{{"City"|translate}} <ion-text color="danger">*</ion-text></ion-label>
+                <ion-select multiple="false" required formControlName="city_id" placeholder="{{'Select One'|translate}} ..." class="form-control">
+                  <ion-select-option *ngFor="let itm of cities" [value]="itm.id">{{itm.name}}</ion-select-option>
+                </ion-select>
+                <ion-label  >{{"Address"|translate}} <ion-text color="danger">*</ion-text></ion-label>
+                <ion-input required formControlName="address" type="text" class="form-control"></ion-input>
+                <div class="row">
+                 
+                  <div class="col col-xs-6">
+                    <ion-button  expand="full"   (click)="back()">
+                      <ion-icon slot="start" name="arrow-back"></ion-icon>
+                      {{"Back"|translate}}
+                    </ion-button>
+                  </div>
+                  <div class="col col-xs-6">
+                    <ion-button  expand="full"   (click)="next()">
+                    {{"Next"|translate}}
+                    <ion-icon slot="end" name="arrow-forward"></ion-icon>
+
+                  </ion-button>
+                </div>
+                </div>
+                
+              </div>
+              
+            </ion-card-content>
+          </ion-card>
+            </ion-slide>
+            <ion-slide>
+              <ion-card  style="width:100%;" > 
+                <ion-card-header>
+                   <ion-card-title>{{"Talent Details"|translate}}</ion-card-title>
+                </ion-card-header>
+                <ion-card-content>
+                <div  style="width:100%">
+                  <ion-label  >{{"Date Of Birth"|translate}} <ion-text color="danger">*</ion-text></ion-label>
+                  <ion-input type="date" formControlName="birthdate" class="form-control" ></ion-input>  
+
+                  <ion-label  >{{"Your talent"|translate}} <ion-text color="danger">*</ion-text></ion-label>
+                  <ion-select multiple="false" required formControlName="category_id" placeholder="{{'Select One'|translate}} ..." class="form-control">
+                    <ion-select-option *ngFor="let itm of categories" [value]="itm.id">{{itm.title}}</ion-select-option>
+                  </ion-select>
+                  <ion-label  >{{"Description"|translate}} </ion-label>
+                  <ion-textarea formControlName="talent_des" class="form-control" ></ion-textarea>  
+                  <ion-label  >{{"Personal Photo"|translate}} <ion-text color="danger">*</ion-text></ion-label>
+                  <ion-input type="file"  (change)="onUserImageChange($event)"  formControlName="img_user" class="form-control" ></ion-input>  
+                  <ion-label  >{{"ID Image"|translate}} <ion-text color="danger">*</ion-text></ion-label>
+                  <ion-input type="file" (change)="onIDImageChange($event)" formControlName="img_id_no" class="form-control" ></ion-input>  
+                </div>
+
+                <!-- <div class="row">
+                  <div class="col col-xs-6"> 
+                    <ion-button  type="submit" [disabled]="form.invalid">
+                        {{"Register"|translate}}
+                    </ion-button>
+                  </div> -->
+              <!-- </div> -->
+              <div class="row">
+                <div class="col col-xs-6">
+                  <ion-button  expand="full"   (click)="back()">
+                    <ion-icon slot="start" name="arrow-back"></ion-icon>
+                  {{"back"|translate}}
                 </ion-button>
               </div>
-              <div class="col col-xs-6">{{"Have account"|translate}} <a routerLink="/login">{{"Login"|translate}}</a></div>
-          </div>
-  
+                <div class="col col-xs-6">
+                  <ion-button  expand="full"  type="submit" [disabled]="form.invalid">
+                    {{"Submit"|translate}}
+                  </ion-button>
+                </div>
+              </div>
+            </ion-card-content>
+          </ion-card>
+            </ion-slide>
+          </ion-slides>
+          <ion-card>
+            <ion-card-content>
+              {{"Have account"|translate}} <a routerLink="/login">{{"Login"|translate}}</a>
+            </ion-card-content>
+          </ion-card>
+
+           
           </form>
-      </ion-card-content>
-    </ion-card>
+       
   </ion-content>
   

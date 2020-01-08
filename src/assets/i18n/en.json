@@ -28,6 +28,14 @@
     "Confirm Password":"Confirm Password",
     "Have account":"Have account",
     "Home":"Home",
-    "Profile":"Profile"
+    "Profile":"Profile",
+    "Your Name":"Your Name",
+    "Personal Info":"Personal Info",
+    "Nationality":"Nationality",
+    "Country":"Country",
+    "City":"City",
+    "Address":"Address",
+    "Address Info":"Address Info",
+    "Talent Details":"Talent Details"
     
 }

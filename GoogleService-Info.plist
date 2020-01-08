@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>991952097357-70d46vcbenc12a3381n0256kuplpgd1s.apps.googleusercontent.com</string>
+	<string>650120348599-chlth1v3ovafftvspbj3r5funv7308o9.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.991952097357-70d46vcbenc12a3381n0256kuplpgd1s</string>
+	<string>com.googleusercontent.apps.650120348599-chlth1v3ovafftvspbj3r5funv7308o9</string>
 	<key>API_KEY</key>
-	<string>AIzaSyAPGAfOs-8SZvCDni68MiGyxg-_-fANPYU</string>
+	<string>AIzaSyCHNgKAR42HhWHrUB09SxT82UA7oyRVrp4</string>
 	<key>GCM_SENDER_ID</key>
-	<string>991952097357</string>
+	<string>650120348599</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.webegy.entaelnagm</string>
+	<string>com.webegy.entaelnegm</string>
 	<key>PROJECT_ID</key>
-	<string>enta-elnagm</string>
+	<string>enta-elnegm</string>
 	<key>STORAGE_BUCKET</key>
-	<string>enta-elnagm.appspot.com</string>
+	<string>enta-elnegm.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:991952097357:ios:4eb4669460feaa18688c04</string>
+	<string>1:650120348599:ios:2b46e53710ab060dc5de32</string>
 	<key>DATABASE_URL</key>
-	<string>https://enta-elnagm.firebaseio.com</string>
+	<string>https://enta-elnegm.firebaseio.com</string>
 </dict>
 </plist>

@@ -1,0 +1,13 @@
+ 
+#slider{
+    position: relative;
+    height: 100%;
+}
+.owl-nav {
+    height: 0px; 
+    position: absolute;
+    top: calc(50% - 30px);
+    left: 0;
+    right: 0;
+    z-index: 999999;
+}

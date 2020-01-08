@@ -11,7 +11,7 @@
     "Login":"تسجيل الدخول",
     "Register":"التسجيل",
     "Photos":"الصور",
-    "Gallery":"المعر",
+    "Gallery":"المعرض",
     "Videos":"الفيديو",
     "Refreshing":"تحديث",
     "Pull to refresh":"اسحب لتحديث الصفحة",
@@ -19,7 +19,7 @@
     "login-subtitle":"اكتب رقم التليفون وكلمة المرور لتسجيل الدخول",
     "Password":"كلمة المرور",
     "Forgot Password":"فقدت كلمة المرور؟",
-    "News":"الأخبار والمقالات",
+    "News":"الأخبار",
     "register-subtitle":"اكتب بياناتك الشخصية بدقة",
     "Your phone":"رقم تليفونك",
     "Your talent":"موهبتك",
@@ -28,5 +28,13 @@
     "Confirm Password":"تأكيد كلمة المرور",
     "Have account":"لدي حساب",
     "Home":"الرئيسية",
-    "Profile":"صفحتي"
+    "Profile":"صفحتي",
+    "Your Name":"الاسم",
+    "Personal Info":"البيانات الشخصية",
+    "Nationality":"الجنسية",
+    "Country":"الدولة",
+    "City":"المحافظة",
+    "Address":"العنوان",
+    "Address Info":"العنوان",
+    "Talent Details":"بيانات الموهبة"
 }

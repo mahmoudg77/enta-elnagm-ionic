@@ -13,6 +13,7 @@ import { AuthService } from './auth/auth.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LookupsService } from './bll/lookups.service';
+import { PostService } from './bll/articles.service';
 
 
 
@@ -34,7 +35,8 @@ import { LookupsService } from './bll/lookups.service';
     LookupsService,
     LoadingService,
     SharedService,
-    AuthGuard
+    AuthGuard,
+    PostService
   ]
 })
 export class MyservicesModule { }

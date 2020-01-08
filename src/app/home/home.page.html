@@ -16,27 +16,27 @@
       </ion-refresher>
   <div id="slider">
     <ion-slides pager="true" options="slideOpts"  class="homeslider">
-      <ion-slide *ngFor="let slide of slides" [ngStyle]="{'background-image':'url('+slide.image + ')'}">
+      <ion-slide *ngFor="let slide of slides" [ngStyle]="{'background-image':'url('+slide.image.md+')'}">
         <h2>{{slide.title}}</h2>
       </ion-slide>
     </ion-slides>
     <div class="owl-nav">
 
-      <ion-button type="submit" class="owl-next" (click)="next()"><ion-icon name="arrow-forward"></ion-icon></ion-button>
-      <ion-button type="submit" class="owl-prev"  (click)="prev()"><ion-icon name="arrow-back"></ion-icon></ion-button>
+      <ion-button type="submit" class="owl-next" [class.pull-right]="!shared.isRTL" [class.pull-left]="shared.isRTL" (click)="next()"><ion-icon name="arrow-forward"></ion-icon></ion-button>
+      <ion-button type="submit" class="owl-prev" [class.pull-right]="shared.isRTL" [class.pull-left]="!shared.isRTL" (click)="prev()"><ion-icon name="arrow-back"></ion-icon></ion-button>
     </div>
   </div>
        <ion-card>
          <ion-card-header>
            <ion-card-subtitle>                    
-             <h2 class="text-center"><a>{{post.title}}</a></h2>
+             <h2 class="text-center"><a>{{about.title}}</a></h2>
             <hr/>
           </ion-card-subtitle>
          </ion-card-header>
           <ion-card-content>
               <div class="row">               
                   <div class="col col-xs-12">
-                    <p>{{post.body}}</p>
+                    <p [innerHTML]="about.description"></p>
                   </div> 
                   <div class="col col-xs-12 text-center">
                       <a routerLink="/register" class="btn">{{"Register Now"|translate}}</a>
@@ -45,33 +45,22 @@
         </ion-card-content>
       </ion-card>
      
-      <ion-slides mode="ios"  options="{effect: 'flip',slidesPerView: 1,
-            spaceBetween: 30,
-            pagination: {
-              el: '.swiper-pagination',
-              clickable: true,
-            },}" pager="ios" scrollbar="ios">
-        <ion-slide *ngFor="let cont of contests">
-          <ion-card >
+           <ion-card *ngFor="let cont of contests" routerLink="/talent-profile/{{cont.user_id}}">
             <ion-card-content>
                <div class="row" class="contests">
-                  <div class="col col-xs-5">
-                      <span class="talend">{{cont.talend}}</span>
-                      <img [src]="cont.image" />
+                  <div class="col col-xs-3">
+                      <span class="talend">{{cont.category.title}}</span>
+                      <img [src]="cont.user.photo.md" class="img-circle" />
                   </div>
-                    <div class="col col-xs-7 text-left">
-                     <h2 class="name">{{cont.name}} </h2>
-                     <span class="age">{{cont.age}} Year</span><br/>
-                     <span class="city badge">{{cont.city}}</span>
-                       
-                       
+                    <div class="col col-xs-9 text-left">
+                     <h2 class="name">{{cont.user.name}} </h2>
+                     <span class="age">{{cont.age|number:'1.0-0'}} Year</span><br/>
+                     <span class="city badge">{{cont.city.name}}</span>
                     </div>
                </div>
-               
              </ion-card-content>
           </ion-card>
-        </ion-slide>
-      </ion-slides>
+
     
 
 <ion-fab vertical="bottom" horizontal="end">

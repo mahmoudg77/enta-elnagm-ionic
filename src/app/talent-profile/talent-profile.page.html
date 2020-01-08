@@ -1,15 +1,9 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>
-      {{"Profile"|translate}}
-    </ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="logout()" expanded="end">
-        <ion-icon slot="icon-only" name="lock"></ion-icon>
-      </ion-button>    
-    </ion-buttons>
-
-    
+<ion-buttons slot="start">
+  <ion-back-button defaultHref="home"></ion-back-button>
+</ion-buttons>    
+<ion-title>{{data.user_id}}-{{data.user?.name}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -21,14 +15,14 @@
       <h2 class="text-center">{{data.user?.name}}</h2>
       <h4 class="text-center"><a>{{data.category?.title}}</a></h4>
       <p  class="text-center"><span class="city badge text-center">{{data.country?.name}}</span> / {{data.age|number:'2.0-0'}} year</p>
-       </div>
-       <hr/>
+      <hr/>
+     </div> 
       <p>{{data.talent_des}}</p>
       <video width="100%" *ngIf="data.user?.talent_file!=null"  controls>
         <source [src]="video" type="video/mp4">
         <source [src]="video" type="video/ogg">
         Your browser does not support HTML5 video.
     </video>
-   
+    
   </div>
 </ion-content>

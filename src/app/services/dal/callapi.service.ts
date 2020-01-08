@@ -1,7 +1,7 @@
 import { Platform } from '@ionic/angular';
 
 import { Router } from '@angular/router';
- import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { stringify } from 'querystring';
 import { apiResult, apiError } from './api-result';
@@ -10,19 +10,22 @@ import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
 import { SharedService } from '../shared.service';
 import { AppVersion } from '@ionic-native/app-version/ngx';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Injectable()
 export class CallapiService {
   version:string=environment.version;
   package:string;
+  lang: string="en";
   constructor(
     public http:HttpClient,
     private shared:SharedService,
     private route:Router,
     //private crashlytic:FirebaseCrashlytics,
     private appVersion:AppVersion,
-    private platform:Platform
+    private platform:Platform,
+    private translate:TranslateService
     ) { 
       //this.crashlytic.initialise();
     //if(!this.platform.is('ios') && !this.platform.is('android')) return;
@@ -39,18 +42,20 @@ export class CallapiService {
   getToken() {
     let token= localStorage.getItem(environment.tokenKey) || null;
     if(token==null) return null;
-    return Guid.isGuid(token)?token:null;
+    return token;
   }
    
   
   getRequest(url:string,pars:any,success_callbak:any,error_callback:any=null){
+    this.lang=this.translate.currentLang;
+
     let parms=stringify(pars);
-    let headers:HttpHeaders= new HttpHeaders({"APP_KEY":environment.apiKey});
+    let headers:HttpHeaders= new HttpHeaders({"X-APP-KEY":environment.apiKey});
     this.getVersion();
-    if(this.getToken()!=null ) headers=headers.append("AUTH_KEY",this.getToken());
-    if(this.version!=null )  headers=headers.append("APP_VER",this.version);
-    
-     this.http.get(environment.apiUrl +  url +(parms?"?":"")+parms,{headers})
+    if(this.getToken()!=null ) headers=headers.append("X-TOKEN",this.getToken());
+    // if(this.version!=null )  headers=headers.append("APP_VER",this.version);
+    //console.log(environment.apiKey);
+     this.http.get(environment.apiUrl + "/api/" + this.lang + url +(parms?"?":"")+parms,{headers})
      .pipe(map((result:apiResult)=>{return result}))
                       .subscribe(
                         next=>{
@@ -71,13 +76,14 @@ export class CallapiService {
   }
   
   postRequest(url:string,pars:any,success_callbak:any=null,error_callback:any=null){
-    
-    let headers:HttpHeaders= new HttpHeaders({"APP_KEY":environment.apiKey});
+    this.lang=this.translate.currentLang;
+
+    let headers:HttpHeaders= new HttpHeaders({"X-APP-KEY":environment.apiKey});
     this.getVersion();
-    if(this.getToken()!=null ) headers=headers.append("AUTH_KEY",this.getToken());
-    if(this.version!=null )  headers=headers.append("APP_VER",this.version);
+    if(this.getToken()!=null ) headers=headers.append("X-TOKEN",this.getToken());
+    // if(this.version!=null )  headers=headers.append("APP_VER",this.version);
     
-    this.http.post(environment.apiUrl + url ,pars,{headers}).pipe(map((result:apiResult)=>{return result}))
+    this.http.post(environment.apiUrl + "/api/" + this.lang + url ,pars,{headers}).pipe(map((result:apiResult)=>{return result}))
             .subscribe(
               next=>{
                   if (next.isSuccess) {
@@ -120,7 +126,7 @@ export class CallapiService {
     }
     errorHandling(error:any){
       if(error.status==403){
-        this.route.navigate(['home']);
+        this.route.navigate(['login']);
       }else if(error.status==401){
         this.shared.error("You are not allowed to perform this action");
       }else if(error.status==500){
@@ -153,3 +159,35 @@ export class CallapiService {
 }
 
 
+export class imageData{
+  file:File;
+  model:string;
+  id:number;
+  tag?:string="main";
+  constructor(_file:File,_model:string,_id:number,private call:CallapiService,_tag:string="main"){
+    this.file=_file;
+    this.model=_model;
+    this.id=_id;
+    this.tag=_tag;
+  }
+ 
+  upload(success_callbak:any,error_callback:any=null){
+    const uploadData = new FormData();
+   //console.log(this.file);
+    uploadData.append('img', this.file, this.file.name);
+
+    this.call.postRequest("/img/upload?model="+this.model+"&model_id="+this.id+"&model_tag="+this.tag,uploadData,
+      res=>{
+        if(success_callbak){
+          success_callbak(res);
+        }
+      },
+      error=>{
+        if(error_callback){
+          error_callback(error);
+        }
+      }
+    )
+  }
+  
+}

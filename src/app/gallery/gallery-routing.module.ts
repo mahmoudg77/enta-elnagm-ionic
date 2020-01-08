@@ -17,8 +17,8 @@ const routes: Routes = [
       {path:'vidoes',component:VideosComponent},
     ]
   },
-  {path:'photos-slider/:index',component:PhotosSliderPage},
-  {path:'videos-slider/:index',component:VideosSliderPage},
+  {path:'photos-slider/:id',component:PhotosSliderPage},
+  {path:'videos-slider/:id',component:VideosSliderPage},
   // {
   //   path: 'photos-slider',
   //   loadChildren: () => import('./photos-slider/photos-slider.module').then( m => m.PhotosSliderPageModule)

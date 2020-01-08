@@ -81,7 +81,9 @@ ion-fab{
         //--color:var(--ion-color-primary-contrast);
     }
 }
-
+ion-card-content{
+    text-align: left;
+}
 ion-card,ion-card-header ,ion-card-content {
     --background: #424040 !important;
     --color:#fff !important;
@@ -99,7 +101,11 @@ hr{
     height: 3px;
     border-top:unset !important;
 }
-
+h2{
+    color:#fff;
+    font-weight: bold;
+    text-shadow: 0px 0px 20px #757474;
+}
 h4{
     text-align: center;
 }
@@ -111,6 +117,83 @@ h4{
 .tab-selected {
     background: #222;
     color:#ff0078;
+}
+p{
+    padding-left:10px;
+    padding-right:10px;
+}
+iframe{
+    width: 100%;
+    min-height: 300px;
+}
+// html:not([data-scroll='0']) {
+//     .talent-profile{
+   
+//         .cover{
+//             display: none;
+//         }
+//         .photo{
+//             width: 50px;
+//             height: 50px;
+//             left: 10;
+//             top: 10;
+//             right: unset;
+//             margin: 20px ;
+//         }
+//         .details{
+//             top:0px;
+//             margin-top:0px;
+//         }
+//     }
+// }
+
+.talent-profile{
+  
+    .cover{
+
+        background: url('assets/images/profile-cover.jpg') center/100%;
+
+        height: 200px;
+        
+        width: 100%;
+        
+        border-bottom: 3px solid var(--ion-color-secondary);
+        
+        box-shadow: 0px 9px 30px#000;
+        
+        position: fixed;
+        
+        top: 50px;
+    
+    }
+
+    .photo{
+        
+        width: 200px;
+
+        height: 200px;
+        
+        border-radius: 50%;
+        
+        border: 3px solid var(--ion-color-secondary);
+        
+        position: fixed;
+        
+        left: 0;
+        
+        right: 0px;
+        
+        margin: -110px auto 0px auto;
+        
+        box-shadow: 0px 9px 30px#000;
+        
+        top: 250px;
+    }
+    
+    .details{
+        margin-top: 290px;
+        overflow-x: scroll;
+    }
 }
 // .tap-selected{
 //     background:var(--ion-color-secondary);

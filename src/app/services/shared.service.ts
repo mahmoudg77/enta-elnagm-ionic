@@ -10,7 +10,7 @@ export class SharedService {
   success(message: string){
     alert(message);
   }
-
+  public isRTL:boolean=false;
   constructor() { }
 
   async presentLoading() {
@@ -25,6 +25,9 @@ export class SharedService {
     return await loadingElement.present();
   }
 
-
+  openUrl(url:string){
+       window.open(url,"_self");
+ 
+  }
 
 }

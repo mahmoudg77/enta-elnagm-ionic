@@ -29,7 +29,7 @@ export class AuthService {
   getToken() {
     let token=localStorage.getItem(environment.tokenKey) || null;
     if(token==null) return null;
-    return Guid.isGuid(token)?token:null;
+    return true ;//Guid.isGuid(token)?token:null;
   }
   setToken(value: string) {
     localStorage.setItem(environment.tokenKey,value);
@@ -59,9 +59,9 @@ export class AuthService {
 
     if(this.getToken()!=null){
       //console.error(this.shared.getToken());
-      this.call.postRequest("/User/Current","",
+      this.call.postRequest("/user/check","",
       next=>{
-        this.setUser(next.account);
+        this.setUser(next.user);
          //this.setToken(next.token);
         if(fnNext) fnNext(next);
       },
@@ -80,7 +80,7 @@ export class AuthService {
       this.fcm.getToken().then(deviceID=>{
           this.call.postRequest("/User/login",{"firebase_token":token,"device_id":deviceID},
           next=>{
-            this.setUser(next.account);
+            this.setUser(next.user);
             this.setToken(next.token);
              if(fnNext!=null) fnNext(next);
           },
@@ -97,7 +97,7 @@ export class AuthService {
   clientLoginByPhone(otp:string,phone:string,fnNext:any=null,fnError:any=null){
           this.call.postRequest("/User/loginbyphone",{"otp":otp,"mobile":phone},
           next=>{
-            this.setUser(next.account);
+            this.setUser(next.user);
             this.setToken(next.token);
             if(fnNext!=null) fnNext(next);
           },
@@ -123,14 +123,15 @@ export class AuthService {
   }
     
   userLogin(username:string,password:string,fnNext:any=null,fnError:any=null){
-         this.call.postRequest("/User/UserLogin",{"username":username,"password":password},
+         this.call.postRequest("/user/login",{"email":username,"password":password},
         next=>{
-          this.setUser(next.account);
+          
+          this.setUser(next.user);
           this.setToken(next.token);
-           if(this.getToken())
-          this.fcm.getToken().then(token=>{
-            this.saveNewDeviceID(token);
-          })
+          //  if(this.getToken())
+          // this.fcm.getToken().then(token=>{
+          //   this.saveNewDeviceID(token);
+          // })
           if(fnNext!=null) fnNext(next);
         },
         error=>{
@@ -142,7 +143,7 @@ export class AuthService {
    }
 
     logout(fnNext:any=null,fnError:any=null) {
-      this.call.getRequest("/User/Logout","",
+      this.call.getRequest("/user/logout","",
               next => { 
                           this.setUser(null);
                           this.clearToken();
@@ -179,4 +180,18 @@ export class AuthService {
             }
         );
     }
+    register(profileData:any,fnNext:any=null,fnError:any=null){
+      this.call.postRequest("/register",profileData,
+      next => { 
+                  this.setUser(next.user);
+                  this.setToken(next.token);
+                  if(fnNext) fnNext(next);
+              },
+      error=>
+              {
+                if(fnError) fnError(error);
+            }
+        );
+    }
+    
 }

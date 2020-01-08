@@ -1,3 +1,4 @@
+import { SharedService } from './services/shared.service';
 import { Component, OnInit, Inject } from '@angular/core';
 
 import { Platform } from '@ionic/angular';
@@ -14,8 +15,10 @@ import { DOCUMENT } from '@angular/common';
 })
 export class AppComponent implements OnInit {
   ngOnInit(): void {
-    this.translate.setDefaultLang("ar");
+    this.translate.setDefaultLang("en");
+    this.translate.currentLang="en";
     
+    console.log(this.translate.getDefaultLang());
     this.platform.ready().then(next=>{
       this.getDeviceLanguage();
       
@@ -27,8 +30,14 @@ export class AppComponent implements OnInit {
     this.globalization.getPreferredLanguage().then(res => {
       console.log(res);
       this.translate.setDefaultLang(res.value.split("-")[0]);
+      this.translate.currentLang=res.value.split("-")[0];
         // Run other functions after getting device default lang
-        this.translate.get('dir').subscribe(v=>this.doc.dir=v);
+        this.translate.get('dir').subscribe(
+            v=>{
+              this.doc.dir=v;
+              this.shared.isRTL=v=='rtl';
+            }
+          );
         })
         .catch(e => console.log(e));
         }
@@ -39,6 +48,7 @@ export class AppComponent implements OnInit {
     private statusBar: StatusBar,
     private globalization: Globalization,
     @Inject(DOCUMENT) private doc,
+    private shared :SharedService,
   ) {
     this.initializeApp();
     

@@ -2,6 +2,9 @@ import { IonSlides } from '@ionic/angular';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { PostService } from 'src/app/services/bll/articles.service';
+import { TranslateService } from '@ngx-translate/core';
+import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
   selector: 'app-videos-slider',
@@ -9,24 +12,21 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
   styleUrls: ['./videos-slider.page.scss'],
 })
 export class VideosSliderPage implements OnInit {
-  gallery:any[]=[];
-  index:number=0;    
-
-  @ViewChild(IonSlides,{static:false}) slider:IonSlides;
-
-  constructor(private route:ActivatedRoute,
-    private domSanitizer: DomSanitizer) { }
-
-  ngOnInit() {
-    for (let index = 474; index < 500; index++) {
-      this.gallery.push(this.domSanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed/DjoSV66aPtk"));
-    }
-    this.route.params.subscribe(params=>{
-      this.index=+params['index'];
-    })
-
+  id:number=0;    
+  video:any;
+  constructor(
+    private postService:PostService,
+    private translate:TranslateService,
+    public shared:SharedService,
+    private domSanitizer: DomSanitizer,
+    private route:ActivatedRoute
+  ) { }
+    ngOnInit() {
+      this.route.params.subscribe(params=>{
+        this.id=+params['id'];
+    
+      this.postService.getPostByID(this.id,next=>this.video=this.domSanitizer.bypassSecurityTrustResourceUrl(next.description));
+    });
   }
-  ngAfterViewInit(){
-    this.slider.slideTo(this.index);
-  }
+  
 }

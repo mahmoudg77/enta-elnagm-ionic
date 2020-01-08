@@ -21,7 +21,7 @@ export class ImageUploaderService {
    //console.log(this.file);
     uploadData.append('img', img.file,img.file.name);
 
-    this.call.postRequest("/Image/Upload?model="+img.model+"&model_id="+img.id+"&model_tag="+img.tag,uploadData,
+    this.call.postRequest("/image/upload?model="+img.model+"&model_id="+img.id+"&model_tag="+img.tag,uploadData,
       res=>{
         if(success_callbak){
           success_callbak(res);

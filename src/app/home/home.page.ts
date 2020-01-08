@@ -1,6 +1,10 @@
+import { environment } from './../../environments/environment';
+import { PostService } from './../services/bll/articles.service';
+import { SharedService } from './../services/shared.service';
 import { LoadingService } from './../services/loading.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonSlides } from '@ionic/angular';
+import { TalentService } from './../services/bll/talent.service';
 
 @Component({
   selector: 'app-home',
@@ -9,38 +13,46 @@ import { IonSlides } from '@ionic/angular';
 })
 export class HomePage implements OnInit {
   @ViewChild(IonSlides,{static: true}) slider:IonSlides;
-
+  public environment=environment;
   constructor(        
     private loading:LoadingService,
+    public shared:SharedService,
+    private posts:PostService,
+    private talent:TalentService
     ) { }
   slides:any[];
   slideOpts = {
     effect: 'flip',
     loop:true,
   };
-  post:any;
+  about:any={};
   contests:any[];
   phone:string;
   whatsapp:string;
+  
   ngOnInit(event=null) {
-    this.slides=[
-      {image:'assets/images/slider/1.jpg',title:'Slide 1'},
-      {image:'assets/images/slider/2.jpg',title:'Slide 2'},
-      {image:'assets/images/slider/3.jpg',title:'Slide 3'},
-    ];
-    this.contests=[
-      {image:'assets/images/slider/1.jpg',name:'Ahmed Hussin Ahmed',age:30,talend:'Artist',city:'Egypt'},
-      {image:'assets/images/slider/2.jpg',name:'Ali Ibraheem',age:25,talend:'Songer',city:'Saudi Arab'},
-      {image:'assets/images/slider/3.jpg',name:'Ramadan Saied Mohammed',age:35,talend:'Football',city:'USA'},
-    ];
+    // this.slides=[
+    //   {image:'assets/images/slider/1.jpg',title:'Slide 1'},
+    //   {image:'assets/images/slider/2.jpg',title:'Slide 2'},
+    //   {image:'assets/images/slider/3.jpg',title:'Slide 3'},
+    // ];
+    this.posts.getPosts('Slider',{},next=>this.slides=next);
+
+    // this.contests=[
+    //   {id:1,image:'assets/images/slider/1.jpg',name:'Ahmed Hussin Ahmed',age:30,talend:'Artist',city:'Egypt'},
+    //   {id:2,image:'assets/images/slider/2.jpg',name:'Ali Ibraheem',age:25,talend:'Songer',city:'Saudi Arab'},
+    //   {id:3,image:'assets/images/slider/3.jpg',name:'Ramadan Saied Mohammed',age:35,talend:'Football',city:'USA'},
+    // ];
+    this.talent.getAll(next=>this.contests=next);
 
     this.slider.startAutoplay();
+    this.posts.getBySlug('about',next=>{this.about=next;});
 
-    this.post={
-      title:'Stories about our life',
-      image:'/assets/images/slider/1.jpg',
-      body:'Bring to the table win-win survival strategies to ensure proactive domination. At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined '
-    }
+    // this.post={
+    //   title:'Stories about our life',
+    //   image:'/assets/images/slider/1.jpg',
+    //   body:'Bring to the table win-win survival strategies to ensure proactive domination. At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined '
+    // }
     this.phone="201143184244";
     this.whatsapp="201280386126";
 

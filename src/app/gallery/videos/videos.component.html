@@ -1,7 +1,11 @@
-<ion-grid fixed>
+<ion-content >
+
+  <ion-grid>
     <ion-row>
-      <ion-col size="3" *ngFor="let itm of gallery; let n=index;">
-        <ion-img [src]="itm" routerLink="/gallery/videos-slider/{{n}}"></ion-img>
+      <ion-col  routerLink="/gallery/videos-slider/{{itm.id}}" size="3" *ngFor="let itm of gallery;">
+        <ion-icon name="play"></ion-icon>
+        <ion-img [src]="itm.image.sm"></ion-img>
       </ion-col>
     </ion-row>
   </ion-grid>
+</ion-content>

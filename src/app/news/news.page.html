@@ -5,11 +5,11 @@
 </ion-header>
 
 <ion-content>
-    <ion-card *ngFor="let post of posts">
+    <ion-card *ngFor="let post of posts" (click)="shared.openUrl(environment.apiUrl+'/'+lang+'/'+ post.slug)">
         <ion-card-content>
            <div class="row">
               <div class="col col-xs-3">
-                  <img [src]="post.image" />
+                  <img [src]="post.image.sm" />
               </div>
                 <div class="col col-xs-9 text-left">
                  <h2>{{post.title}} </h2>
