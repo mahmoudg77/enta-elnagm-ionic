@@ -1,14 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AuthGuard } from './../../services/auth/auth.guard';
 
-import { ProfilePage } from './profile.page';
+import { LoadingViewPage } from './loading-view.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: ProfilePage,
-    canActivate:[AuthGuard]
+    component: LoadingViewPage
   }
 ];
 
@@ -16,4 +14,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class ProfilePageRoutingModule {}
+export class LoadingViewPageRoutingModule {}

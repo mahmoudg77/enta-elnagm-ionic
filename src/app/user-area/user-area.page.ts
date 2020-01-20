@@ -9,7 +9,9 @@ export class UserAreaPage implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  ionViewWillEnter(){this._ngOnInit();}
+  ngOnInit() {}
+  _ngOnInit() {
   }
 
 }

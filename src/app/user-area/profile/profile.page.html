@@ -1,5 +1,8 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
     <ion-title>
       {{"Profile"|translate}}
     </ion-title>
@@ -8,14 +11,23 @@
         <ion-icon slot="icon-only" name="lock"></ion-icon>
       </ion-button>    
     </ion-buttons>
-
-    
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <div class="talent-profile">
     <div class="cover"></div>
+    <div class="buttons-area">
+      <div class="row">
+        <div class="col col-xs-3 text-center">      
+          <a class="btn" routerLink="/user-area/profile" >{{"Profile"|translate}}</a>
+        </div>
+        <div class="col col-xs-6"></div>
+        <div class="col col-xs-3 text-center">      
+          <a class="btn" routerLink="/user-area/application" >{{"Talent"|translate}}</a>
+        </div>
+      </div>
+    </div>
     <img class="photo" [src]="data.user?.photo.md"/>
     <div class="details">
       <h2 class="text-center">{{data.user?.name}}</h2>

@@ -1,9 +1,56 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>application</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{"Application"|translate}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="logout()" expanded="end">
+        <ion-icon slot="icon-only" name="lock"></ion-icon>
+      </ion-button>    
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <div class="talent-profile">
+    <div class="cover"></div>
+    <div class="buttons-area">
+      <div class="row">
+        <div class="col col-xs-3 text-center">      
+          <a class="btn" routerLink="/user-area/profile" >{{"Profile"|translate}}</a>
+        </div>
+        <div class="col col-xs-6"></div>
+        <div class="col col-xs-3 text-center">      
+          <a class="btn" routerLink="/user-area/application" >{{"Talent"|translate}}</a>
+        </div>
+      </div>
+    </div>
+    <img class="photo" [src]="data.user?.photo.md"/>
+    <div class="details">
+     
+<ion-card>
+  <ion-card-header>
+    <ion-card-subtitle class="text-center">{{"My talent status"|translate}}</ion-card-subtitle>
+  </ion-card-header>
+  <ion-card-content>
+    <h1 class="text-center">{{status.name}}</h1>
+    <p class="text-center" >{{status.message}}</p>
+  </ion-card-content>
+</ion-card>
+<ion-card *ngIf="status.status==-1 || status.status==2">
+  <ion-card-header>
 
+    <ion-card-title class="text-center">{{"Upload File"|translate}}</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <input type="file" placeholder="Select your file" (change)="onFileChange($event)">
+    <ion-button (click)="onSubmit()">
+      Upload
+    </ion-button>
+  </ion-card-content>
+</ion-card>
+
+</div>  
+</div>
 </ion-content>

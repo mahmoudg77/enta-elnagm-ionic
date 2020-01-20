@@ -1,3 +1,5 @@
+import { AlertModule } from './alert/alert.module';
+import { AlertService } from './alert/alert.service';
 import { AuthGuard } from './auth/auth.guard';
 import { FCM } from '@ionic-native/fcm/ngx';
 import { IonicStorageModule } from '@ionic/storage';
@@ -14,6 +16,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LookupsService } from './bll/lookups.service';
 import { PostService } from './bll/articles.service';
+import { ValidationService } from './validation.service';
 
 
 
@@ -21,6 +24,7 @@ import { PostService } from './bll/articles.service';
   declarations: [],
   imports: [
     CommonModule,
+    AlertModule
   ],
   providers:[
     AppVersion,
@@ -36,7 +40,8 @@ import { PostService } from './bll/articles.service';
     LoadingService,
     SharedService,
     AuthGuard,
-    PostService
+    PostService,
+    ValidationService
   ]
 })
 export class MyservicesModule { }

@@ -16,6 +16,6 @@ export const environment = {
     driverOrder: ['indexeddb', 'sqlite', 'websql']
   },
   apiKey:"BkMId5al9ETygAeWJ8u6iCjNDvszwmf4cKVHUYZ3nb2Sr0hFpOPq7XLG1QxtoR",
-  apiUrl:"https://elnagm.web-egypt.net",
+  apiUrl:"https://entaelnegm.com",
   version:'1.0.1'
 };

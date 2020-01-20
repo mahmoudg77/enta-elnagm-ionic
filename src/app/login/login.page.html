@@ -1,11 +1,15 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>{{"Login"|translate}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/register">{{"Register"|translate}}
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-img src="/assets/icon/favicon.png" style="width: 280px;margin: auto;"></ion-img>
+  <img src="/assets/icon/favicon.png" class="logo"/>
   <ion-card>
     <ion-card-header style="text-align: center;">
       <ion-card-title>{{"Login"|translate}}</ion-card-title>

@@ -14,8 +14,10 @@ export class ForgetpasswordPage implements OnInit {
     });
     
   }
-  ngOnInit() {
+  ionViewWillEnter(){this._ngOnInit();}
+  ngOnInit() {}
+  _ngOnInit() {
   }
   onSubmit(){}
-
+   
 }

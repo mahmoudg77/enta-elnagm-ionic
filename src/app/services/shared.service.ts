@@ -1,17 +1,61 @@
+import { AlertService } from './alert/alert.service';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class SharedService {
+  public alertViewObject:any;
   error(message: string){
-    alert(message);
+      this.alert.error("Error",message);
+     
   }
   success(message: string){
-    alert(message);
+    
+      this.alert.success("Success",message);
+   
+  
+  }
+  redirectToError(message: string,next="/home"){
+    this.alertViewObject={
+      title:"Error",
+      message:message,
+      icon:"close-circle",
+          color:"red",
+      next:next
+    };
+    this.router.navigateByUrl("/alert-view");
+    
+  }
+  redirectToWarning(message: string,next="/home"){
+    this.alertViewObject={
+      title:"Warning",
+      message:message,
+      icon:"information-circle",
+      color:"yellow",
+      next:next
+    };
+    this.router.navigateByUrl("/alert-view");
+    
+  }
+  redirectToSuccess(message: string,next="/home"){
+    
+        this.alertViewObject={
+          title:"Success",
+          message:message,
+        
+          icon:"checkmark-circle",
+          color:"green",
+    
+          next:next
+        };
+      this.router.navigateByUrl("/alert-view");
+   
   }
   public isRTL:boolean=false;
-  constructor() { }
+  constructor(private alert: AlertService,private router:Router) { }
 
   async presentLoading() {
     const loadingController = document.querySelector('ion-loading-controller');

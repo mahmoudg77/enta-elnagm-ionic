@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{title}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+  <ion-card [ngStyle]="{'border': '2px  ' + color + ' inset'}">
+    <ion-card-header>
+      <ion-card-title class="text-center">
+        <ion-icon [name]="icon" [ngStyle]="{'color':  color }"></ion-icon>
+      </ion-card-title>
+
+    </ion-card-header>
+    <ion-card-content  class="text-center">
+      {{message}}
+    </ion-card-content>
+    <hr [ngStyle]="{'background-color':  color }"/>
+    <ion-button expand="full" (click)="dismiss()">
+      Close
+    </ion-button>
+  </ion-card>
+  
+</ion-content>

@@ -3,6 +3,7 @@ import { environment } from './../../environments/environment';
 import { Component, OnInit } from '@angular/core';
 import { PostService } from '../services/bll/articles.service';
 import { TranslateService } from '@ngx-translate/core';
+import { LoadingService } from '../services/loading.service';
 
 @Component({
   selector: 'app-news',
@@ -15,13 +16,20 @@ posts:any[]=[];
   constructor(
     private postService:PostService,
     private translate:TranslateService,
-    public shared:SharedService
+    public shared:SharedService,
+    private load:LoadingService
     ) { }
   public environment=environment;
-  ngOnInit() {
+  ionViewWillEnter(){this._ngOnInit();}
+  ngOnInit() {}
+  _ngOnInit() {
+    this.load.present();
     this.lang=this.translate.currentLang;
-    this.postService.getPosts('Blogs',{},next=>this.posts=next);
-
+    this.postService.getPosts('Blogs',{},next=>{
+      this.posts=next;
+      this.load.dismiss();
+    });
+    
     // for (let index = 500; index < 520; index++) {
       
     //   this.posts.push(
@@ -35,6 +43,6 @@ posts:any[]=[];
     // }
   }
     
- 
+   
 
 }

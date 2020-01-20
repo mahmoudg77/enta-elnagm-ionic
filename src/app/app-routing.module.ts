@@ -44,12 +44,23 @@ const routes: Routes = [
     path: 'talent-profile',
     loadChildren: () => import('./talent-profile/talent-profile.module').then( m => m.TalentProfilePageModule)
   },
+  {
+    path: 'alert-view',
+    loadChildren: () => import('./alert-view/alert-view.module').then( m => m.AlertViewPageModule)
+  },
+  {
+    path: 'loading-view',
+    loadChildren: () => import('./loading-view/loading-view.module').then( m => m.LoadingViewPageModule)
+  },
+ 
  
 ];
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
-  ],
+    RouterModule.forRoot(routes, {onSameUrlNavigation:"reload" })
+  ], // preloadingStrategy: PreloadAllModules,
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule {
+
+}

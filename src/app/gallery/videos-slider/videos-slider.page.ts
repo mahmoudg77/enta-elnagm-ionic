@@ -5,6 +5,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { PostService } from 'src/app/services/bll/articles.service';
 import { TranslateService } from '@ngx-translate/core';
 import { SharedService } from 'src/app/services/shared.service';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-videos-slider',
@@ -19,13 +20,22 @@ export class VideosSliderPage implements OnInit {
     private translate:TranslateService,
     public shared:SharedService,
     private domSanitizer: DomSanitizer,
-    private route:ActivatedRoute
+    private route:ActivatedRoute,
+    private load:LoadingService
   ) { }
-    ngOnInit() {
+  ionViewWillEnter(){this._ngOnInit();}
+  ngOnInit() {}
+  _ngOnInit() {
+      this.load.present();
       this.route.params.subscribe(params=>{
         this.id=+params['id'];
-    
-      this.postService.getPostByID(this.id,next=>this.video=this.domSanitizer.bypassSecurityTrustResourceUrl(next.description));
+        
+      this.postService.getPostByID(this.id,
+        next=>{this.video=this.domSanitizer.bypassSecurityTrustResourceUrl(next.description);
+          this.load.dismiss();
+        },err=>{
+          this.load.dismiss();
+        });
     });
   }
   

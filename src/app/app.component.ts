@@ -1,3 +1,4 @@
+import { AuthService } from 'src/app/services/auth/auth.service';
 import { SharedService } from './services/shared.service';
 import { Component, OnInit, Inject } from '@angular/core';
 
@@ -7,6 +8,8 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { TranslateService } from '@ngx-translate/core';
 import { Globalization } from '@ionic-native/globalization/ngx';
 import { DOCUMENT } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FCM } from '@ionic-native/fcm/ngx';
  
 @Component({
   selector: 'app-root',
@@ -14,17 +17,23 @@ import { DOCUMENT } from '@angular/common';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent implements OnInit {
+  
   ngOnInit(): void {
     this.translate.setDefaultLang("en");
     this.translate.currentLang="en";
     
-    console.log(this.translate.getDefaultLang());
-    this.platform.ready().then(next=>{
+     this.platform.ready().then(next=>{
       this.getDeviceLanguage();
       
     });
 
-  
+    this.platform.backButton.subscribe(next=>{
+      if(this.router.url=="/home"){
+        navigator['app'].exitApp();
+      }else{
+        return false;
+      }
+    })
   }
   getDeviceLanguage() {
     this.globalization.getPreferredLanguage().then(res => {
@@ -49,6 +58,9 @@ export class AppComponent implements OnInit {
     private globalization: Globalization,
     @Inject(DOCUMENT) private doc,
     private shared :SharedService,
+    private router:Router,
+    private fcm:FCM,
+    private auth:AuthService
   ) {
     this.initializeApp();
     
@@ -56,8 +68,17 @@ export class AppComponent implements OnInit {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
+    //this.statusBar.overlaysWebView(false);
+      // set status bar to white
+      //this.statusBar.backgroundColorByHexString('#ffffff'); 
+      this.statusBar.styleBlackTranslucent(); 
+      // this.statusBar.styleDefault();
       this.splashScreen.hide();
+
+      this.fcm.onTokenRefresh().subscribe(token=>{
+        this.auth.saveNewDeviceID(token);
+      });
     });
   }
+
 }

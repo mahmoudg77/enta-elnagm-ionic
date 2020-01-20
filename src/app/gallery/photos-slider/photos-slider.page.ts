@@ -5,6 +5,7 @@ import { PostService } from 'src/app/services/bll/articles.service';
 import { TranslateService } from '@ngx-translate/core';
 import { SharedService } from 'src/app/services/shared.service';
 import { environment } from 'src/environments/environment';
+import { LoadingService } from 'src/app/services/loading.service';
  
 @Component({
   selector: 'app-photos-slider',
@@ -21,16 +22,23 @@ export class PhotosSliderPage implements OnInit {
     private postService:PostService,
     private translate:TranslateService,
     public shared:SharedService,
-    private route:ActivatedRoute
+    private route:ActivatedRoute,
+    private load:LoadingService
   ) { }
   public environment=environment;
-  ngOnInit() {
+  ionViewWillEnter(){this._ngOnInit();}
+  ngOnInit() {}
+  _ngOnInit() {
     this.lang=this.translate.currentLang;
+    this.load.present();
     this.postService.getPostsByCat('photos',{},next=>{
       this.gallery=next;
       this.route.params.subscribe(params=>{
         this.index=+params['index'];
+        this.load.dismiss();
       });
+    },err=>{
+      this.load.dismiss();
     });
 
     // for (let index = 300; index < 330; index++) {
@@ -39,7 +47,7 @@ export class PhotosSliderPage implements OnInit {
   
     
   }
-  
+   
   ngAfterViewInit(){
     this.slider.slideTo(this.index);
 

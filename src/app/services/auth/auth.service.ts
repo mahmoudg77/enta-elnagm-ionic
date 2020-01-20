@@ -29,7 +29,7 @@ export class AuthService {
   getToken() {
     let token=localStorage.getItem(environment.tokenKey) || null;
     if(token==null) return null;
-    return true ;//Guid.isGuid(token)?token:null;
+    return token||null ;//Guid.isGuid(token)?token:null;
   }
   setToken(value: string) {
     localStorage.setItem(environment.tokenKey,value);
@@ -128,14 +128,14 @@ export class AuthService {
           
           this.setUser(next.user);
           this.setToken(next.token);
-          //  if(this.getToken())
-          // this.fcm.getToken().then(token=>{
-          //   this.saveNewDeviceID(token);
-          // })
+         // if(this.getToken())
+          this.fcm.getToken().then(token=>{
+            this.saveNewDeviceID(token);
+          })
           if(fnNext!=null) fnNext(next);
         },
         error=>{
-          this.setToken(null);
+          this.clearToken();
            this.setUser(null);
           if(fnError!=null) fnError(error);
         }
@@ -152,13 +152,17 @@ export class AuthService {
                       },
               error=>
                       {
-                       
-                        if(fnError) fnError(error);
+                        this.setUser(null);
+                        this.clearToken();
+                        if(fnNext) fnNext(error);
+                        firebase.auth().signOut();
+                        //if(fnError) fnError(error);
                     }
           );
     }
     saveNewDeviceID(device_id:string,fnNext:any=null,fnError:any=null) {
-      this.call.postRequest("/User/SaveNewDeviceID?device_id="+device_id,"",
+      if(this.getToken())
+      this.call.postRequest("/user/saveNewToken",{token:device_id},
               next => { 
                           if(fnNext) fnNext(next);
                       },

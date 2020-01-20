@@ -22,10 +22,9 @@ export class AboutPage implements OnInit {
       this.id=id;
     })
    }
-
-  ngOnInit() {
-    
-  }
+   ionViewWillEnter(){this._ngOnInit();}
+  ngOnInit() {}
+  _ngOnInit() {}
   onRateApp(){
     this.market.open(this.id);
     // window.open('market://details?id=com.webegy.aldawlia', '_system', 'location=yes');

@@ -11,6 +11,7 @@ import { map } from 'rxjs/operators';
 import { SharedService } from '../shared.service';
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { TranslateService } from '@ngx-translate/core';
+import { LoadingService } from '../loading.service';
 
 
 @Injectable()
@@ -18,6 +19,7 @@ export class CallapiService {
   version:string=environment.version;
   package:string;
   lang: string="en";
+ 
   constructor(
     public http:HttpClient,
     private shared:SharedService,
@@ -25,7 +27,8 @@ export class CallapiService {
     //private crashlytic:FirebaseCrashlytics,
     private appVersion:AppVersion,
     private platform:Platform,
-    private translate:TranslateService
+    private translate:TranslateService,
+    private load :LoadingService
     ) { 
       //this.crashlytic.initialise();
     //if(!this.platform.is('ios') && !this.platform.is('android')) return;
@@ -40,9 +43,9 @@ export class CallapiService {
     })
   }
   getToken() {
-    let token= localStorage.getItem(environment.tokenKey) || null;
+    let token=localStorage.getItem(environment.tokenKey) || null;
     if(token==null) return null;
-    return token;
+    return token||null ;//Guid.isGuid(token)?token:null;
   }
    
   
@@ -53,6 +56,7 @@ export class CallapiService {
     let headers:HttpHeaders= new HttpHeaders({"X-APP-KEY":environment.apiKey});
     this.getVersion();
     if(this.getToken()!=null ) headers=headers.append("X-TOKEN",this.getToken());
+    
     // if(this.version!=null )  headers=headers.append("APP_VER",this.version);
     //console.log(environment.apiKey);
      this.http.get(environment.apiUrl + "/api/" + this.lang + url +(parms?"?":"")+parms,{headers})
@@ -97,8 +101,10 @@ export class CallapiService {
               },
               error=>{
                 this.logException("POST " +url,headers,pars,error);
+                //const err=JSON.parse(error.responseText);
+                 
                 if(error_callback!=null)  error_callback({code:error.status,message:error.statusText});
-                //this.errorHandling(error)
+                this.errorHandling(error)
               }
             ) 
   }
@@ -125,29 +131,35 @@ export class CallapiService {
      
     }
     errorHandling(error:any){
+      if(this.load.isLoading)this.load.dismiss();
       if(error.status==403){
-        this.route.navigate(['login']);
+        this.route.navigate(['/','login']);
       }else if(error.status==401){
-        this.shared.error("You are not allowed to perform this action");
+        this.shared.redirectToError("You are not allowed to perform this action");
       }else if(error.status==500){
         //this.shared.error("There are problem in the server !!");
       }else if(error.status==502){
         //this.shared.error("Bad Gateway error !!");
       }else if(error.status==406){
-        this.shared.error("This option is disbaled now !!");
+        this.shared.redirectToError("This option is disbaled now !!");
+      }else if(error.status==422){
+        console.log(error);
+        const validations=error.error;
+        var msg="";
+        Object.keys(validations).forEach(element => {
+          msg+=(msg==""?"":"<br/>") + validations[element][0];
+        });
+        this.shared.error(msg);
       }else{
         //this.shared.error(error.message);
       }
     }
     softErrorHandling(error:any){
-      if(error.code==1403){
-        this.route.navigate(['home']);
-      }else if(error.code==1401){
-        this.shared.error("ليس لديك صلاحية!");
-      }else if(error.code==1403){
-        this.route.navigate(['home']);
-      }else if(error.code==1406){
-        this.shared.error("هذه الميزة غير مفعلة الأن !");
+      if(this.load.isLoading)this.load.dismiss();
+      if(error.code==403){
+        this.route.navigate(['/','login']);
+      }else if(error.code==401){
+        this.shared.redirectToError(error.message);
       }else{
         this.shared.error(error.message);
       }

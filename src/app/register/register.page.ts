@@ -1,3 +1,4 @@
+import { AlertService } from './../services/alert/alert.service';
 import { ImageFile } from './../services/dal/image-uploader.service';
 import { AuthService } from './../services/auth/auth.service';
 import { LookupsService } from './../services/bll/lookups.service';
@@ -6,6 +7,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonSlides } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { ImageUploaderService } from '../services/dal/image-uploader.service';
+import { LoadingService } from '../services/loading.service';
+import { ValidationService } from '../services/validation.service';
 
 @Component({
   selector: 'app-register',
@@ -21,32 +24,58 @@ export class RegisterPage implements OnInit {
   IDImage: any;
   UserImage: any;
 
-  constructor(private formBuilder:FormBuilder,private lookup:LookupsService,private auth:AuthService,private router:Router,private imgUploader:ImageUploaderService) { 
+  constructor(private formBuilder:FormBuilder,
+    private lookup:LookupsService,
+    private auth:AuthService,
+    private router:Router,
+    private imgUploader:ImageUploaderService,
+    private load:LoadingService,
+    private alert:AlertService,
+    private formValidation:ValidationService) { 
     this.form=this.formBuilder.group({
-      phone:['',[Validators.required,Validators.maxLength(12),Validators.minLength(10)]],
-      name:['',[Validators.required]],
-      email:['',[Validators.required,Validators.email]],
-      category_id:['',Validators.required],
-      password:['',Validators.required],
-      cpassword:['',Validators.required],
-      country:['',Validators.required],
-      city_id:['',Validators.required],
-      address:['',Validators.required],
-      talent_des:[''],
-      nationality:['',Validators.required],
-      img_user:['',Validators.required],
-      img_id_no:['',Validators.required],
-      birthdate:['',Validators.required],
-    });
-
+      // step1:this.formBuilder.group({
+        name:['',[Validators.required,Validators.minLength(8)]],
+        phone:['',[Validators.required,Validators.maxLength(15),Validators.minLength(10)]],
+        email:['',[Validators.required,Validators.email]],
+        password:['',[Validators.required,Validators.minLength(6)]],
+        password_confirmation:['',[Validators.required,formValidation.confirmValidator('password')]],
+      // }),
+      // step2:this.formBuilder.group({
+        nationality:['',Validators.required],
+        country:['',Validators.required],
+        city_id:['',Validators.required],
+        address:['',Validators.required],
+      // }),
+      // step3:this.formBuilder.group({
+        category_id:['',Validators.required],
+        talent_des:[''],
+        img_user:['',Validators.required],
+        img_id_no:['',Validators.required],
+        birthdate:['',Validators.required],
+      })
+    // });
   }
 
-  ngOnInit() {
-    this.lookup.getChields(21,next=>this.categories=next)
-    this.lookup.getCountries(next=>this.countries=next)
+  ionViewWillEnter(){this._ngOnInit();}
+  ngOnInit() {}
+  _ngOnInit() {
+    this.load.present()
+    this.lookup.getChields(21,next=>{
+      this.categories=next;
+      this.lookup.getCountries(next=>{
+        this.countries=next;
+        this.load.dismiss();
+      },err=>{
+        this.load.dismiss();
+      })
+    },err=>{
+      this.load.dismiss();
+    })
     
   }
+   
   onSubmit(){
+    this.load.present();
     this.auth.register(this.form.getRawValue(),
     next=>{
 
@@ -64,18 +93,28 @@ export class RegisterPage implements OnInit {
         img.tag="img_user";
         this.imgUploader.upload(img,data=>{
           this.router.navigateByUrl("/user-area/profile");
+          this.load.dismiss();
+        },err=>{
+          this.load.dismiss();
+          this.alert.error("Profile Image",err.message);
         });
         
+      },err=>{
+        this.load.dismiss();
+        this.alert.error("ID Image",err.message);
       })
     },
     error=>{
-
+      this.load.dismiss();
+      this.alert.error("Register",error.message);
     })
   }
 
   onCountryChange(){
-    //console.log("ddddddd");
-    this.lookup.getCities(this.form.get('country').value,next=>this.cities=next)
+    this.lookup.getCities(this.form.get('country').value,
+    next=>{
+      this.cities=next;
+    });
   }
   next(){
     this.slider.slideNext(2000);

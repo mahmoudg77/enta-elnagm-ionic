@@ -18,7 +18,9 @@ export class TalentProfilePage implements OnInit {
     private route:ActivatedRoute
     ) { }
 
-  ngOnInit() {
+    ionViewWillEnter(){this._ngOnInit();}
+  ngOnInit() {}
+  _ngOnInit() {
     this.route.params.subscribe(params=>{
       this.id=+params['id'];
 
@@ -29,7 +31,7 @@ export class TalentProfilePage implements OnInit {
       );
   });
   }
-
+   
   
 
  

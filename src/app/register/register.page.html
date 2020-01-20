@@ -1,11 +1,16 @@
 <ion-header>
     <ion-toolbar>
       <ion-title>{{"Register"|translate}}</ion-title>
+      <ion-buttons slot="end">
+        <ion-button routerLink="/login">
+          {{"Login"|translate}}
+        </ion-button>
+      </ion-buttons>
     </ion-toolbar>
   </ion-header>
   
   <ion-content>
-    <ion-img src="/assets/icon/favicon.png" style="width: 280px;margin: auto;"></ion-img>
+    <img src="/assets/icon/favicon.png" class="logo"/>
  
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
           <ion-slides style="width:100%;">
@@ -15,22 +20,46 @@
                   <ion-card-title>{{"Register"|translate}}</ion-card-title>
                    <ion-card-subtitle>{{"Personal Info"|translate}}</ion-card-subtitle>
                 </ion-card-header>
-                <ion-card-content>
-                  <ion-label>{{"Your Name"|translate}} <ion-text color="danger">*</ion-text></ion-label>
-                <ion-input required formControlName="name" type="text"  class="form-control"></ion-input>
-
-                <ion-label>{{"Your phone"|translate}} <ion-text color="danger">*</ion-text></ion-label>
-                <ion-input required formControlName="phone" type="text"  class="form-control"></ion-input>
-                <ion-label>{{"Your email"|translate}} <ion-text color="danger">*</ion-text></ion-label>
-                <ion-input required formControlName="email" type="text"  class="form-control"></ion-input>
-                 <ion-label  >{{"Password"|translate}} <ion-text color="danger">*</ion-text></ion-label>
+                <ion-card-content >
+                    <ion-label>{{"Your Name"|translate}} <ion-text color="danger">*</ion-text></ion-label>
+                    <ion-input required formControlName="name" type="text"  class="form-control"></ion-input>
+                    <div *ngIf="form.controls['name'].invalid && (form.controls['name'].dirty || form.controls['name'].touched)" class="text-danger">
+                      <div *ngIf="form.controls['name'].errors.required">{{"Your name is required"|translate}}</div>
+                      <div *ngIf="form.controls['name'].errors.minLength">{{"Your name is too small"|translate}}</div>
+                      <div *ngIf="form.controls['name'].errors.pattern">{{"Invalid Name"|translate}}</div>
+                    </div>
+                  
+                    <ion-label>{{"Your phone"|translate}} <ion-text color="danger">*</ion-text></ion-label>
+                    <ion-input required formControlName="phone" type="text" inputmode="tel"  class="form-control"></ion-input>
+                    <div *ngIf="form.controls['phone'].invalid && (form.controls['phone'].dirty || form.controls['phone'].touched)" class="text-danger">
+                      <div *ngIf="form.controls['phone'].errors.required">{{"Your phone is required"|translate}}</div>
+                      <div *ngIf="form.controls['phone'].errors.minLength">{{"Your phone is too small"|translate}}</div>
+                      <div *ngIf="form.controls['phone'].errors.maxLength">{{"Must less than 16 numeric"|translate}}</div>
+                    </div>
+               
+                    <ion-label>{{"Your email"|translate}} <ion-text color="danger">*</ion-text></ion-label>
+                    <ion-input required formControlName="email" type="text"  class="form-control"></ion-input>
+                    <div *ngIf="form.controls['email'].invalid && (form.controls['email'].dirty || form.controls['email'].touched)" class="text-danger">
+                      <div *ngIf="form.controls['email'].errors.required">{{"Email is required"|translate}}</div>
+                      <div *ngIf="form.controls['email'].errors.email">{{"Invalid Email"|translate}}</div>
+                    </div>
+                
+                <ion-label  >{{"Password"|translate}} <ion-text color="danger">*</ion-text></ion-label>
                 <ion-input required formControlName="password" type="password" class="form-control"></ion-input>
+                <div *ngIf="form.controls['password'].invalid && (form.controls['password'].dirty || form.controls['password'].touched)" class="text-danger">
+                  <div *ngIf="form.controls['password'].errors.required">{{"Password is required"|translate}}</div>
+                  <div *ngIf="form.controls['password'].errors.minLength">{{"Too small password"|translate}}</div>
+                </div>
                  <ion-label  >{{"Confirm Password"|translate}} <ion-text color="danger">*</ion-text></ion-label>
-                <ion-input required formControlName="cpassword" type="password" class="form-control"></ion-input>
-    
-                <ion-button expand="full"  (click)="next()">
+                <ion-input required formControlName="password_confirmation" type="password" class="form-control"></ion-input>
+                <div *ngIf="form.controls['password_confirmation'].invalid && (form.controls['password_confirmation'].dirty || form.controls['password_confirmation'].touched)" class="text-danger">
+                  <div *ngIf="form.controls['password_confirmation'].errors.required">{{"Confirm password is required"|translate}}</div>
+                  <div *ngIf="form.controls['password_confirmation'].errors.confirm">{{"Confirm password not matches"|translate}}</div>
+
+                </div>
+                <ion-button expand="full" [disabled]="form.controls['name'].invalid  || form.controls['phone'].invalid || form.controls['email'].invalid || form.controls['password'].invalid  || form.controls['password_confirmation'].invalid " (click)="next()">
                   {{"Next"|translate}}
-                  <ion-icon slot="end" name="arrow-forward"></ion-icon>
+                <ion-icon slot="end" name="arrow-forward"></ion-icon>
 
                 </ion-button>
                  </ion-card-content>
@@ -47,18 +76,28 @@
                 <ion-select multiple="false" required formControlName="nationality" placeholder="{{'Select One'|translate}} ..." class="form-control">
                  <ion-select-option *ngFor="let itm of countries" [value]="itm.id">{{itm.name}}</ion-select-option>
                 </ion-select>
-
+                <div *ngIf="form.controls['nationality'].invalid && (form.controls['nationality'].dirty || form.controls['nationality'].touched)" class="text-danger">
+                  <div *ngIf="form.controls['nationality'].errors.required">{{"Nationality is required"|translate}}</div>
+                </div>
                 <ion-label  >{{"Country"|translate}} <ion-text color="danger">*</ion-text></ion-label>
                 <ion-select multiple="false"  (ionChange)="onCountryChange()" required formControlName="country" placeholder="{{'Select One'|translate}} ..." class="form-control">
                   <ion-select-option *ngFor="let itm of countries" [value]="itm.id">{{itm.name}}</ion-select-option>
                 </ion-select>
-                
+                <div *ngIf="form.controls['country'].invalid && (form.controls['country'].dirty || form.controls['country'].touched)" class="text-danger">
+                  <div *ngIf="form.controls['country'].errors.required">{{"Country is required"|translate}}</div>
+                </div>
                 <ion-label  >{{"City"|translate}} <ion-text color="danger">*</ion-text></ion-label>
                 <ion-select multiple="false" required formControlName="city_id" placeholder="{{'Select One'|translate}} ..." class="form-control">
                   <ion-select-option *ngFor="let itm of cities" [value]="itm.id">{{itm.name}}</ion-select-option>
                 </ion-select>
+                <div *ngIf="form.controls['city_id'].invalid && (form.controls['city_id'].dirty || form.controls['city_id'].touched)" class="text-danger">
+                  <div *ngIf="form.controls['city_id'].errors.required">{{"City is required"|translate}}</div>
+                </div>
                 <ion-label  >{{"Address"|translate}} <ion-text color="danger">*</ion-text></ion-label>
-                <ion-input required formControlName="address" type="text" class="form-control"></ion-input>
+                <ion-textarea required formControlName="address" ></ion-textarea>
+                <div *ngIf="form.controls['address'].invalid && (form.controls['address'].dirty || form.controls['address'].touched)" class="text-danger">
+                  <div *ngIf="form.controls['address'].errors.required">{{"Address is required"|translate}}</div>
+                </div>
                 <div class="row">
                  
                   <div class="col col-xs-6">
@@ -68,15 +107,14 @@
                     </ion-button>
                   </div>
                   <div class="col col-xs-6">
-                    <ion-button  expand="full"   (click)="next()">
+                    <ion-button  expand="full" [disabled]="form.controls['country'].invalid || form.controls['nationality'].invalid || form.controls['city_id'].invalid || form.controls['address'].invalid"   (click)="next()">
                     {{"Next"|translate}}
                     <ion-icon slot="end" name="arrow-forward"></ion-icon>
 
                   </ion-button>
                 </div>
                 </div>
-                
-              </div>
+               </div>
               
             </ion-card-content>
           </ion-card>
@@ -86,30 +124,28 @@
                 <ion-card-header>
                    <ion-card-title>{{"Talent Details"|translate}}</ion-card-title>
                 </ion-card-header>
-                <ion-card-content>
+                <ion-card-content  >
                 <div  style="width:100%">
                   <ion-label  >{{"Date Of Birth"|translate}} <ion-text color="danger">*</ion-text></ion-label>
                   <ion-input type="date" formControlName="birthdate" class="form-control" ></ion-input>  
-
+                  <div *ngIf="form.controls['birthdate'].invalid && (form.controls['birthdate'].dirty || form.controls['birthdate'].touched)" class="text-danger">
+                    <div *ngIf="form.controls['birthdate'].errors.required">{{"Birth date is required"|translate}}</div>
+                  </div>
+  
                   <ion-label  >{{"Your talent"|translate}} <ion-text color="danger">*</ion-text></ion-label>
                   <ion-select multiple="false" required formControlName="category_id" placeholder="{{'Select One'|translate}} ..." class="form-control">
                     <ion-select-option *ngFor="let itm of categories" [value]="itm.id">{{itm.title}}</ion-select-option>
                   </ion-select>
+                  <div *ngIf="form.controls['category_id'].invalid && (form.controls['category_id'].dirty || form.controls['category_id'].touched)" class="text-danger">
+                    <div *ngIf="form.controls['category_id'].errors.required">{{"Talent is required"|translate}}</div>
+                  </div>
                   <ion-label  >{{"Description"|translate}} </ion-label>
-                  <ion-textarea formControlName="talent_des" class="form-control" ></ion-textarea>  
-                  <ion-label  >{{"Personal Photo"|translate}} <ion-text color="danger">*</ion-text></ion-label>
-                  <ion-input type="file"  (change)="onUserImageChange($event)"  formControlName="img_user" class="form-control" ></ion-input>  
-                  <ion-label  >{{"ID Image"|translate}} <ion-text color="danger">*</ion-text></ion-label>
-                  <ion-input type="file" (change)="onIDImageChange($event)" formControlName="img_id_no" class="form-control" ></ion-input>  
+                  <ion-textarea formControlName="talent_des"></ion-textarea>  
+                
+                  
                 </div>
 
-                <!-- <div class="row">
-                  <div class="col col-xs-6"> 
-                    <ion-button  type="submit" [disabled]="form.invalid">
-                        {{"Register"|translate}}
-                    </ion-button>
-                  </div> -->
-              <!-- </div> -->
+                
               <div class="row">
                 <div class="col col-xs-6">
                   <ion-button  expand="full"   (click)="back()">
@@ -118,20 +154,69 @@
                 </ion-button>
               </div>
                 <div class="col col-xs-6">
-                  <ion-button  expand="full"  type="submit" [disabled]="form.invalid">
-                    {{"Submit"|translate}}
+                  <ion-button  expand="full" [disabled]="form.controls['birthdate'].invalid || form.controls['category_id'].invalid"   (click)="next()">
+                    {{"Next"|translate}}
+                    <ion-icon slot="end" name="arrow-forward"></ion-icon>
                   </ion-button>
                 </div>
               </div>
             </ion-card-content>
           </ion-card>
             </ion-slide>
+
+            <ion-slide>
+              <ion-card  style="width:100%;" > 
+                <ion-card-header>
+                   <ion-card-title>{{"Documnets"|translate}}</ion-card-title>
+                </ion-card-header>
+                <ion-card-content>
+               <div  style="width:100%">
+                <div class="row">
+                  <div class="col col-xs-6">
+                    <ion-label  >{{"Personal Photo"|translate}} <ion-text color="danger">*</ion-text></ion-label>
+                    <label class="img-upload">
+                      <input type="file"  (change)="onUserImageChange($event)"  formControlName="img_user">  
+                    </label>
+                    <div *ngIf="form.controls['img_user'].invalid && (form.controls['img_user'].dirty || form.controls['img_user'].touched)" class="text-danger">
+                      <div *ngIf="form.controls['img_user'].errors.required">{{"Talent is required"|translate}}</div>
+                    </div>
+                  </div>
+                  <div class="col col-xs-6">
+                    <ion-label  >{{"ID Image"|translate}} <ion-text color="danger">*</ion-text></ion-label>
+                    
+                    <label  class="img-upload">
+                      <input type="file" (change)="onIDImageChange($event)" formControlName="img_id_no">  
+                    </label>
+                    <div *ngIf="form.controls['img_id_no'].invalid && (form.controls['img_id_no'].dirty || form.controls['img_id_no'].touched)" class="text-danger">
+                      <div *ngIf="form.controls['img_id_no'].errors.required">{{"Talent is required"|translate}}</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col col-xs-6">
+                    <ion-button  expand="full"   (click)="back()">
+                      <ion-icon slot="start" name="arrow-back"></ion-icon>
+                    {{"back"|translate}}
+                  </ion-button>
+                </div>
+                  <div class="col col-xs-6">
+                    <ion-button  expand="full"  [disabled]="form.invalid" type="submit" [disabled]="form.invalid">
+                      {{"Submit"|translate}}
+                    </ion-button>
+                  </div>
+                </div>
+                </div>
+                </ion-card-content>
+                </ion-card> 
+            </ion-slide>
           </ion-slides>
-          <ion-card>
+
+          <!-- <ion-card>
             <ion-card-content>
               {{"Have account"|translate}} <a routerLink="/login">{{"Login"|translate}}</a>
             </ion-card-content>
-          </ion-card>
+          </ion-card> -->
 
            
           </form>

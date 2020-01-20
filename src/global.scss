@@ -94,6 +94,10 @@ ion-item {
 ion-card-header *{
     --color:#fff !important;
 }
+ion-textarea{
+    --height: 100px;
+    --background:var(--ion-color-primary) !important;
+}
 
 hr{
     background: var(--ion-color-secondary);
@@ -104,7 +108,7 @@ hr{
 h2{
     color:#fff;
     font-weight: bold;
-    text-shadow: 0px 0px 20px #757474;
+    text-shadow: 0px 0px 20px #1a1717;
 }
 h4{
     text-align: center;
@@ -116,7 +120,7 @@ h4{
 
 .tab-selected {
     background: #222;
-    color:#ff0078;
+    color:#d039ee;//#ff0078;
 }
 p{
     padding-left:10px;
@@ -194,7 +198,28 @@ iframe{
         margin-top: 290px;
         overflow-x: scroll;
     }
+    .buttons-area {
+        background: var(--ion-color-secondary);
+        overflow: hidden;
+        height: 40px;
+        position: fixed;
+        left: 0;
+        right: 0;
+        margin-top: -90px;
+    }
+    // .buttons-area a {
+    //     color: #fff;
+    //     font-size: 5px;
+    // }
 }
+
+.logo{
+    max-width: 230px;
+    max-height: 150px;
+    margin: auto;
+    display: block;
+}
+
 // .tap-selected{
 //     background:var(--ion-color-secondary);
 //     ion-lable,ion-icon{
