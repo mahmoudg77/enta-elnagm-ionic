@@ -87,7 +87,7 @@ export class CallapiService {
     if(this.getToken()!=null ) headers=headers.append("X-TOKEN",this.getToken());
     // if(this.version!=null )  headers=headers.append("APP_VER",this.version);
     
-    this.http.post(environment.apiUrl + "/api/" + this.lang + url ,pars,{headers}).pipe(map((result:apiResult)=>{return result}))
+    this.http.post(environment.apiUrl + "/api/" + this.lang + url ,pars,{headers:headers}).pipe(map((result:apiResult)=>{return result}))
             .subscribe(
               next=>{
                   if (next.isSuccess) {
@@ -108,6 +108,9 @@ export class CallapiService {
               }
             ) 
   }
+
+ 
+
     logException(url,headers:HttpHeaders,pars,error){
       var obj={
         Package:this.package,

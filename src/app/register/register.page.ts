@@ -3,7 +3,7 @@ import { ImageFile } from './../services/dal/image-uploader.service';
 import { AuthService } from './../services/auth/auth.service';
 import { LookupsService } from './../services/bll/lookups.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { IonSlides } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { ImageUploaderService } from '../services/dal/image-uploader.service';
@@ -15,7 +15,11 @@ import { ValidationService } from '../services/validation.service';
   templateUrl: './register.page.html',
   styleUrls: ['./register.page.scss'],
 })
-export class RegisterPage implements OnInit {
+export class RegisterPage implements OnInit,OnDestroy {
+  ngOnDestroy(): void {
+    this.form.reset();
+    this.slider.slideTo(0);
+  }
   form:FormGroup;
   categories: any[];
   countries: any[];
@@ -60,6 +64,9 @@ export class RegisterPage implements OnInit {
   ngOnInit() {}
   _ngOnInit() {
     this.load.present()
+    this.form.reset();
+    this.slider.slideTo(0);
+    
     this.lookup.getChields(21,next=>{
       this.categories=next;
       this.lookup.getCountries(next=>{

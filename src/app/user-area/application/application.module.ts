@@ -1,3 +1,8 @@
+import { WebView } from '@ionic-native/ionic-webview/ngx';
+import { Chooser } from '@ionic-native/chooser/ngx';
+import { File } from '@ionic-native/file/ngx';
+import { Media } from '@ionic-native/media/ngx';
+import { MediaCapture } from '@ionic-native/media-capture/ngx';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -17,6 +22,13 @@ import { TranslateModule } from '@ngx-translate/core';
     ApplicationPageRoutingModule,
     TranslateModule
   ],
-  declarations: [ApplicationPage]
+  declarations: [ApplicationPage],
+  providers:[
+    File,
+    Media,
+    MediaCapture,
+    Chooser,
+    WebView
+  ]
 })
 export class ApplicationPageModule {}

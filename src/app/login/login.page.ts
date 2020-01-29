@@ -1,5 +1,5 @@
 import { AlertService } from './../services/alert/alert.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -10,7 +10,10 @@ import { LoadingService } from '../services/loading.service';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
-export class LoginPage implements OnInit {
+export class LoginPage implements OnInit,OnDestroy {
+  ngOnDestroy(): void {
+    this.form.reset();
+  }
   form:FormGroup;
   loading:boolean=false;
   redirectTo:string="/profile";

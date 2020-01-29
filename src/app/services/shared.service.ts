@@ -73,5 +73,20 @@ export class SharedService {
        window.open(url,"_self");
  
   }
+   matchInArray(string, expressions) {
+
+    var len = expressions.length,
+        i = 0;
+
+    for (; i < len; i++) {
+        if (string.match(expressions[i])) {
+            return true;
+        }
+    }
+
+    return false;
+
+};
+
 
 }

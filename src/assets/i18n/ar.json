@@ -36,5 +36,9 @@
     "City":"المحافظة",
     "Address":"العنوان",
     "Address Info":"العنوان",
-    "Talent Details":"بيانات الموهبة"
+    "Talent Details":"بيانات الموهبة",
+    "btn_yes":"نعم",
+    "btn_no":"لا",
+    "dialog_exit_title":"الخروج",
+    "dialog_exit_message":"هل تريد الخروج من التطبيق؟"
 }

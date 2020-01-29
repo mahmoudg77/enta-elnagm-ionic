@@ -17,10 +17,11 @@
     </ion-card-header>
     <ion-card-content>
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
-           <ion-label>{{"Phone"|translate}}<ion-text color="danger">*</ion-text></ion-label>
+           <ion-label>{{"Email"|translate}}<ion-text color="danger">*</ion-text></ion-label>
           <ion-input required formControlName="email" type="email"  class="form-control"></ion-input>
            <ion-label  >{{"Password"|translate}} <ion-text color="danger">*</ion-text></ion-label>
-          <ion-input required formControlName="password" type="password" class="form-control"></ion-input>
+          <ion-input required formControlName="password" #pass type="password" class="form-control"></ion-input>
+          <ion-icon slot="end" (click)="pass.type=='text'?pass.type='password':pass.type='text'" name="eye" class="show-icon"></ion-icon>
          <ion-button  type="submit" [disabled]="form.invalid || loading">
             {{"Login"|translate}}
         </ion-button>

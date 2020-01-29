@@ -10,6 +10,7 @@ import { UserAreaPageRoutingModule } from './user-area-routing.module';
 
 import { UserAreaPage } from './user-area.page';
 import { TranslateModule } from '@ngx-translate/core';
+ 
 
 @NgModule({
   imports: [
@@ -21,6 +22,9 @@ import { TranslateModule } from '@ngx-translate/core';
     ApplicationPageModule,
     TranslateModule
   ],
-  declarations: [UserAreaPage]
+  declarations: [UserAreaPage],
+  providers:[
+    
+  ]
 })
 export class UserAreaPageModule {}

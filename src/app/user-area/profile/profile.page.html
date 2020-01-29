@@ -36,7 +36,7 @@
        </div>
        <hr/>
       <p>{{data.talent_des}}</p>
-      <video width="100%" *ngIf="data.user?.talent_file!=null"  controls>
+      <video width="100%" *ngIf="data.user?.talent_file!=null"  controls="controls" controlsList="nodownload" preload="metadata" poster="assets/icon/favicon.png" webkit-playsinline="webkit-playsinline" class="videoPlayer">
         <source [src]="video" type="video/mp4">
         <source [src]="video" type="video/ogg">
         Your browser does not support HTML5 video.

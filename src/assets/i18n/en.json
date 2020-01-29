@@ -36,6 +36,9 @@
     "City":"City",
     "Address":"Address",
     "Address Info":"Address Info",
-    "Talent Details":"Talent Details"
-    
+    "Talent Details":"Talent Details",
+    "btn_yes":"Yes",
+    "btn_no":"No",
+    "dialog_exit_title":"Exit",
+    "dialog_exit_message":"Are you sure you want to exit?"
 }

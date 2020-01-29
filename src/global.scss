@@ -24,6 +24,7 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+@import "theme/css/font-awesome.min.css";
 @import "theme/bootstrap.min.scss";
 // @import "theme/bootstrap-theme.min.scss";
 @import "theme/theme.scss";
@@ -168,15 +169,14 @@ iframe{
         position: fixed;
         
         top: 50px;
-    
+        z-index: 9999;
     }
 
     .photo{
         
-        width: 200px;
+        width: 180px;
 
-        height: 200px;
-        
+        height: 180px;        
         border-radius: 50%;
         
         border: 3px solid var(--ion-color-secondary);
@@ -192,11 +192,24 @@ iframe{
         box-shadow: 0px 9px 30px#000;
         
         top: 250px;
+        z-index: 9999;
     }
     
     .details{
         margin-top: 290px;
         overflow-x: scroll;
+    }
+    .status-card{
+        border: 2px solid var(--ion-color-secondary);
+        border-style: dashed;
+        border-radius: 40px;
+        box-shadow: 2px 2px 15px#ddd;
+        background:#fff;
+        i{
+            font-size: 8rem;
+            color:var(--ion-color-secondary);
+            text-shadow: 1px 0px 2px #fff;
+        }
     }
     .buttons-area {
         background: var(--ion-color-secondary);
@@ -206,7 +219,26 @@ iframe{
         left: 0;
         right: 0;
         margin-top: -90px;
+        z-index: 9999;
     }
+    .edit-image {
+        z-index: 9999;
+        position: fixed;
+        margin-left: auto;
+        margin-right: auto;
+        display: inline-block;
+        left: 0;
+        right: 0;
+        margin-top: -50px;
+        border-radius: 30px;
+        border-radius: 30px;
+        border: 1px solid var(--ion-color-secondary);
+        color: var(--ion-color-secondary);
+        background:#ffffffd6;
+        font-size: 30px;
+        padding: 5px;
+    }
+
     // .buttons-area a {
     //     color: #fff;
     //     font-size: 5px;

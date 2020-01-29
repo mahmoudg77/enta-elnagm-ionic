@@ -17,6 +17,8 @@ import { CommonModule } from '@angular/common';
 import { LookupsService } from './bll/lookups.service';
 import { PostService } from './bll/articles.service';
 import { ValidationService } from './validation.service';
+import { FileTransfer} from '@ionic-native/file-transfer/ngx';
+import { File } from '@ionic-native/file/ngx';
 
 
 
@@ -41,7 +43,9 @@ import { ValidationService } from './validation.service';
     SharedService,
     AuthGuard,
     PostService,
-    ValidationService
+    ValidationService,
+    FileTransfer,
+    File
   ]
 })
 export class MyservicesModule { }

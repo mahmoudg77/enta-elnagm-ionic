@@ -26,31 +26,51 @@
         </div>
       </div>
     </div>
-    <img class="photo" [src]="data.user?.photo.md"/>
-    <div class="details">
-     
-<ion-card>
-  <ion-card-header>
-    <ion-card-subtitle class="text-center">{{"My talent status"|translate}}</ion-card-subtitle>
-  </ion-card-header>
-  <ion-card-content>
-    <h1 class="text-center">{{status.name}}</h1>
-    <p class="text-center" >{{status.message}}</p>
-  </ion-card-content>
-</ion-card>
-<ion-card *ngIf="status.status==-1 || status.status==2">
-  <ion-card-header>
+    <img class="photo"  [src]="data.user?.photo.md"/>
+        <ion-icon class="edit-image" slot="icon-only" (click)="onClick()" name="create"></ion-icon>
+     <div class="details">
+      <ion-card class="status-card">
+        <ion-card-header>
+          <ion-card-subtitle class="text-center">{{"My talent status"|translate}}</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <h3 class="text-center">
+            <i class="fa fa-spinner fa-spin" 
+            [class.fa-spinner.fa-spin]="status.status==0" 
+            [class.fa-info-circle]="status.status==2" 
+            [class.fa-times]="status.status==3" 
+            [class.fa-thumbs-up]="status.status==1" 
+            ></i>
+          </h3>
+          
+          <p class="text-center" >{{status.name}}</p>
+          <p class="text-center" >{{status.message}}</p>
+        </ion-card-content>
+      </ion-card>
+      <ion-card *ngIf="status.status==-1 || status.status==2">
+        <ion-card-header>
 
-    <ion-card-title class="text-center">{{"Upload File"|translate}}</ion-card-title>
-  </ion-card-header>
-  <ion-card-content>
-    <input type="file" placeholder="Select your file" (change)="onFileChange($event)">
-    <ion-button (click)="onSubmit()">
-      Upload
-    </ion-button>
-  </ion-card-content>
-</ion-card>
+          <ion-card-title class="text-center">{{"Upload File"|translate}}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content class="text-center">
+          <!-- <input type="file" #fileinput placeholder="Select your file" (change)="onFileChange($event)"> -->
+          <!-- <a class="btn btn-primary" (click)="captureVideo()">Video</a>
+          <a class="btn btn-primary" (click)="captureAudio()">Audio</a> -->
+          <!-- <a class="btn btn-primary" (click)="presentActionSheet()">File</a> -->
+          <video  #videoplayer style="max-width: 100%;height: 300px;" controls="controls" controlsList="nodownload" preload="metadata" poster="assets/icon/favicon.png" webkit-playsinline="webkit-playsinline" class="videoPlayer">
+            </video>
 
-</div>  
+          <div class="progress"  *ngIf="submitted"><div [ngStyle]="{'width':talent.progressValue +'%'}" style="background: #8d30f0;">{{talent.progressValue}}%</div></div>
+          <!-- <ion-progress type="determinate" [value]="progressValue" buffer= "0.5" reversed="true" color="primary"></ion-progress> -->
+          <hr/>
+          <ion-button (click)="presentActionSheet()" >
+            {{"Select ..."|translate}}
+          </ion-button>
+          <ion-button [disabled]="submitted" (click)="onSubmit()" *ngIf="attach.name">
+            {{"Upload"|translate}}
+          </ion-button>
+        </ion-card-content>
+      </ion-card>
+    </div>  
 </div>
 </ion-content>

@@ -11,7 +11,7 @@ import { Router, NavigationEnd } from '@angular/router';
 })
 export class ProfilePage implements OnInit {
   
-  data:any={};
+  data:any={user:{photo:{md:'assets/images/profile-photo.jpg'}}};
   video:any;
   constructor(private profile:ProfileService,
     private domSanitizer: DomSanitizer,
