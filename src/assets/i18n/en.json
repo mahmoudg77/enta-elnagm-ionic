@@ -40,5 +40,21 @@
     "btn_yes":"Yes",
     "btn_no":"No",
     "dialog_exit_title":"Exit",
-    "dialog_exit_message":"Are you sure you want to exit?"
+    "dialog_exit_message":"Are you sure you want to exit?",
+    "Logout":"Logout",
+    "Alt_Language":"عربي",
+    "Upload":"Upload","Video_Recorder":"Video Recorder","Voice_Recorder":"Voice Recorder","From_file":"From file","Cancel":"Cancel",
+    "Status":"Status",
+    "Years":"Years",
+    "Camera":"Camera",
+    "read-more":"Read more",
+    "read-less":"Read less",
+    "Date Of Birth":"Date Of Birth",
+    "Description":"About your talent",
+    "Documnets":"Documents",
+    "Personal Photo":"Personal Photo",
+    "ID Image":"ID Image",
+    "Submit":"Submit",
+    "back":"Back",
+    "next":"Next"
 }

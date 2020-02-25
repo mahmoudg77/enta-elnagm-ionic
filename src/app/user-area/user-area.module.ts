@@ -1,3 +1,4 @@
+import { ComponentsModule } from './../components/components.module';
 import { ApplicationPageModule } from './application/application.module';
 import { ProfilePageModule } from './profile/profile.module';
 import { NgModule } from '@angular/core';
@@ -20,7 +21,8 @@ import { TranslateModule } from '@ngx-translate/core';
     UserAreaPageRoutingModule,
     ProfilePageModule,
     ApplicationPageModule,
-    TranslateModule
+    TranslateModule,
+    ComponentsModule
   ],
   declarations: [UserAreaPage],
   providers:[

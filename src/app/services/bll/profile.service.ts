@@ -25,13 +25,15 @@ export class ProfileService {
   }
  
   uploadProfileImage(file,next:any=null,error:any=null){
+    console.log(file);
     this.auth.getUser().then(user=>{
       var img= new ImageFile();
       img.file=file;
       img.id=user.id;
       img.model="App\\User";
       img.tag="img_user";
-      this.imgUploader.upload(file,data=>{if(next)next(data);},err=>{if(error)error(err);});
+      img.filename="app_profile_image_"+user.id+".jpg";
+      this.imgUploader.upload(img,data=>{if(next)next(data);},err=>{if(error)error(err);});
     }).catch(err=>{if(error)error(err);});
   }
   uploadIDImage(file,next:any=null,error:any=null){
@@ -41,7 +43,8 @@ export class ProfileService {
       img.id=user.id;
       img.model="App\\User";
       img.tag="img_id_no";
-      this.imgUploader.upload(file,data=>{if(next)next(data);},err=>{if(error)error(err);});
+      img.filename="app_profile_image_"+user.id+".jpg";
+      this.imgUploader.upload(img,data=>{if(next)next(data);},err=>{if(error)error(err);});
     }).catch(err=>{if(error)error(err);});
   }
 }

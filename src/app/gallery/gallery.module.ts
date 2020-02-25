@@ -1,3 +1,5 @@
+import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player/ngx';
+import { ComponentsModule } from './../components/components.module';
 import { VideosSliderPageModule } from './videos-slider/videos-slider.module';
 import { PhotosSliderPageModule } from './photos-slider/photos-slider.module';
 import { PhotosComponent } from './photos/photos.component';
@@ -18,8 +20,13 @@ import { TranslateModule } from '@ngx-translate/core';
     GalleryPageRoutingModule,
     PhotosSliderPageModule,
     VideosSliderPageModule,
-    TranslateModule
+    TranslateModule,
+    ComponentsModule,
   ],
-  declarations: [GalleryPage,VideosComponent,PhotosComponent]
+  declarations: [GalleryPage,VideosComponent,PhotosComponent],
+  providers:[
+    YoutubeVideoPlayer
+
+  ]
 })
 export class GalleryPageModule {}

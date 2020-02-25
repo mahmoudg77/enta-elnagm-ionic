@@ -52,7 +52,7 @@ export class RegisterPage implements OnInit,OnDestroy {
       // }),
       // step3:this.formBuilder.group({
         category_id:['',Validators.required],
-        talent_des:[''],
+        talent_des:['',Validators.required],
         img_user:['',Validators.required],
         img_id_no:['',Validators.required],
         birthdate:['',Validators.required],
@@ -91,13 +91,15 @@ export class RegisterPage implements OnInit,OnDestroy {
       img.id=next.user.id;
       img.model="App\\User";
       img.tag="img_id_no";
-      
+      img.filename="app_register_image_profile.jpg";
+
       this.imgUploader.upload(img,data=>{
         var img= new ImageFile();
         img.file=this.UserImage;
         img.id=next.user.id;
         img.model="App\\User";
         img.tag="img_user";
+        img.filename="app_register_image_profile.jpg";
         this.imgUploader.upload(img,data=>{
           this.router.navigateByUrl("/user-area/profile");
           this.load.dismiss();
@@ -113,7 +115,7 @@ export class RegisterPage implements OnInit,OnDestroy {
     },
     error=>{
       this.load.dismiss();
-      this.alert.error("Register",error.message);
+      // this.alert.error("Register",error.message);
     })
   }
 

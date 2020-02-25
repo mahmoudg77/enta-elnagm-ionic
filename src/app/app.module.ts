@@ -1,5 +1,7 @@
+import { ComponentsModule } from './components/components.module';
+import { HeaderComponent } from './components/header/header.component';
 import { Market } from '@ionic-native/market/ngx';
-import { AppVersion } from '@ionic-native/app-version/ngx';
+// import { AppVersion } from '@ionic-native/app-version/ngx';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -35,14 +37,15 @@ import { ReactiveFormsModule } from '@angular/forms';
     }),
     IonicStorageModule.forRoot(),
     MyservicesModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ComponentsModule
   ],
   providers: [
     Globalization,
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    AppVersion,
+    // AppVersion,
     Market,
 
      

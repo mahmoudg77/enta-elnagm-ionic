@@ -1,3 +1,4 @@
+import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player/ngx';
 import { Component, OnInit } from '@angular/core';
 import { PostService } from 'src/app/services/bll/articles.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -16,7 +17,9 @@ export class VideosComponent implements OnInit {
     private postService:PostService,
     private translate:TranslateService,
     public shared:SharedService,
-    private load:LoadingService
+    private load:LoadingService,
+    private youtube:YoutubeVideoPlayer
+
 
   ) { }
   public environment=environment;
@@ -37,6 +40,18 @@ export class VideosComponent implements OnInit {
     // for (let index = 300; index < 330; index++) {
     //   this.gallery.push("https://picsum.photos/id/"+index+"/200/200");
     // }
+  }
+  playVideo(id){
+    this.postService.getPostByID(id,
+      next=>{
+        //this.video=this.domSanitizer.bypassSecurityTrustResourceUrl(next.description);
+     var vid=(<string>next.description).split("?")[0].split("/").pop();
+        this.youtube.openVideo(vid);
+        this.load.dismiss();
+      },err=>{
+        this.load.dismiss();
+      });
+ 
   }
    
 }

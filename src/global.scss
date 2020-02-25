@@ -25,18 +25,25 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 @import "theme/css/font-awesome.min.css";
+@import "theme/css/google-fonts.css";
 @import "theme/bootstrap.min.scss";
+@import "theme/bootstrap-rtl.min.scss";
 // @import "theme/bootstrap-theme.min.scss";
 @import "theme/theme.scss";
 
-
+.swiper-zoom-container{
+    text-align:inherit !important;
+}
+// *:not(.fa){
+//     font-family:'Cairo' !important;
+// }
 ion-content{
     //--background-color:var(--ion-color-tertiary);
     --background:#000000c7 ;//url('/assets/images/featured-slider-02.jpg') no-repeat center / auto 100% fixed;
 }
 ion-toolbar{
-    --background:var(--ion-color-primary);
-    --color:var(--ion-color-secondary)
+    --background:var(--ion-color-secondary);
+    --color:white;
 }
 ion-button{
     --background:var(--ion-color-secondary);
@@ -82,9 +89,9 @@ ion-fab{
         //--color:var(--ion-color-primary-contrast);
     }
 }
-ion-card-content{
-    text-align: left;
-}
+// ion-card-content{
+//     text-align: left;
+// }
 ion-card,ion-card-header ,ion-card-content {
     --background: #424040 !important;
     --color:#fff !important;
@@ -258,3 +265,22 @@ iframe{
 //         color:var(--ion-color-tertiary);
 //     }
 // }
+
+// //bootstrap
+// .text-center{
+//     text-align: center;
+// }
+// .row{
+//     display:flex;
+//     padding:0px 15px
+// }
+// .col{
+
+// }
+.card-content-md p {
+    font-size: 15px;
+    font-weight: 400;
+    text-align: justify;
+    line-height: 30px;
+    color: #fbfbfb;
+}

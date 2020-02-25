@@ -1,4 +1,4 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
@@ -10,7 +10,8 @@
       </ion-button>    
     </ion-buttons>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
+<app-header title="Status"></app-header>
 
 <ion-content>
   <div class="talent-profile">
@@ -22,12 +23,11 @@
         </div>
         <div class="col col-xs-6"></div>
         <div class="col col-xs-3 text-center">      
-          <a class="btn" routerLink="/user-area/application" >{{"Talent"|translate}}</a>
+          <a class="btn" routerLink="/user-area/application" >{{"Status"|translate}}</a>
         </div>
       </div>
     </div>
     <img class="photo"  [src]="data.user?.photo.md"/>
-        <ion-icon class="edit-image" slot="icon-only" (click)="onClick()" name="create"></ion-icon>
      <div class="details">
       <ion-card class="status-card">
         <ion-card-header>
@@ -35,7 +35,7 @@
         </ion-card-header>
         <ion-card-content>
           <h3 class="text-center">
-            <i class="fa fa-spinner fa-spin" 
+            <i class="fa" 
             [class.fa-spinner.fa-spin]="status.status==0" 
             [class.fa-info-circle]="status.status==2" 
             [class.fa-times]="status.status==3" 

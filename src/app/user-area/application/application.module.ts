@@ -1,3 +1,4 @@
+import { ComponentsModule } from './../../components/components.module';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { Chooser } from '@ionic-native/chooser/ngx';
 import { File } from '@ionic-native/file/ngx';
@@ -20,7 +21,8 @@ import { TranslateModule } from '@ngx-translate/core';
     FormsModule,
     IonicModule,
     ApplicationPageRoutingModule,
-    TranslateModule
+    TranslateModule,
+    ComponentsModule
   ],
   declarations: [ApplicationPage],
   providers:[

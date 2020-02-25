@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -12,10 +12,11 @@ export class LoadingService {
 
   async present(message:string="") {
     this.isLoading = true;
+    
     return await this.loadingController.create({
         message:message,
         duration: 15000,
-        
+        spinner: 'dots',
     }).then(a => {
       a.present().then(() => {
         // console.log('presented');

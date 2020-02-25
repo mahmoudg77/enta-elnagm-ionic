@@ -1,8 +1,9 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar>
     <ion-title>{{"Enta Elnagm"|translate}}</ion-title>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
+<app-header title="Enta Elnagm"></app-header>
 
 <ion-content >
     <ion-refresher slot="fixed" (ionRefresh)="ngOnInit($event)">
@@ -15,8 +16,10 @@
         </ion-refresher-content>
       </ion-refresher>
   <div id="slider">
-    <ion-slides pager="true" options="slideOpts"  class="homeslider">
-      <ion-slide *ngFor="let slide of slides" [ngStyle]="{'background-image':'url('+slide.image.md+')'}">
+    <ion-slides pager="false" options="slideOpts"  class="homeslider">
+      <ion-slide *ngFor="let slide of slides" ><!--[ngStyle]="{'background-image':'url('+slide.image.md+')'}"-->
+        <ion-img [src]="slide.image.md" style="width:100%;"></ion-img>
+
         <h2>{{slide.title}}</h2>
       </ion-slide>
     </ion-slides>
@@ -26,6 +29,18 @@
       <ion-button type="submit" class="owl-prev" [class.pull-right]="shared.isRTL" [class.pull-left]="!shared.isRTL" (click)="prev()"><ion-icon name="arrow-back"></ion-icon></ion-button>
     </div>
   </div>
+  <hr/>
+<div class="row">
+  <div class="col-xs-12 text-center">
+    <a class="social-icon" (click)="openExternal(twitter)"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+    <a class="social-icon" (click)="openExternal(facebook)"><i class="fa fa-facebook" aria-hidden="true"></i></a>  
+    <a class="social-icon" (click)="openExternal(instagram)"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+    <a class="social-icon" (click)="openExternal(youtube)"><i class="fa fa-youtube" aria-hidden="true"></i></a>
+    <a class="social-icon" (click)="openExternal(snapchat)"><i class="fa fa-snapchat" aria-hidden="true"></i></a>
+  
+  </div>
+</div>
+  
        <ion-card>
          <ion-card-header>
            <ion-card-subtitle>                    
@@ -36,10 +51,16 @@
           <ion-card-content>
               <div class="row">               
                   <div class="col col-xs-12">
-                    <p [innerHTML]="about.description"></p>
+                    <p [innerHTML]="readAllAbout?about.body:about.description"></p>
+                    
+                    <div class="text-center">
+                     <a class="btn btn-primary text-center" *ngIf="!readAllAbout" (click)="readAllAbout=true">{{"read-more"|translate}}</a>
+                     <a class="btn btn-primary text-center" *ngIf="readAllAbout" (click)="readAllAbout=false">{{"read-less"|translate}}</a>
+                    </div>
                   </div> 
                   <div class="col col-xs-12 text-center">
-                      <a routerLink="/register" class="btn">{{"Register Now"|translate}}</a>
+                    <hr/>
+                      <a *ngIf="allow_register==1" routerLink="/register" class="btn">{{"Register Now"|translate}}</a>
                   </div> 
                 </div>
         </ion-card-content>
@@ -63,6 +84,9 @@
 
     
 
+          
+          
+</ion-content>
 <ion-fab vertical="bottom" horizontal="end">
     <ion-fab-button >
       <ion-icon name="call" style="color:#fff;font-size: 1.9em"></ion-icon>
@@ -77,7 +101,4 @@
       </ion-fab-button>
     </ion-fab-list>
   
-  </ion-fab>
-
- 
-</ion-content>
+</ion-fab>

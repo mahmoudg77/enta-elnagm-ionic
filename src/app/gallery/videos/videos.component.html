@@ -2,7 +2,8 @@
 
   <ion-grid>
     <ion-row>
-      <ion-col  routerLink="/gallery/videos-slider/{{itm.id}}" size="6" *ngFor="let itm of gallery;">
+      <!-- routerLink="/gallery/videos-slider/{{itm.id}}" -->
+      <ion-col  (click)="playVideo(itm.id)" size="6" *ngFor="let itm of gallery;">
         <ion-icon name="play"></ion-icon>
         <ion-img [src]="itm.image.sm"></ion-img>
       </ion-col>

@@ -11,6 +11,7 @@ export const environment = {
     measurementId: "G-2FQWHKZ8QY"
   },
   tokenKey:"x-entaelnagm-token-key",
+  STORAGE_APP_LANG:"x-entaelnagm-lang-key",
   database:{
     name: '__entaelnagmdb',
     driverOrder: ['indexeddb', 'sqlite', 'websql']

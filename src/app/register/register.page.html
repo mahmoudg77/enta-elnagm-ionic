@@ -1,4 +1,4 @@
-<ion-header>
+<!-- <ion-header>
     <ion-toolbar>
       <ion-title>{{"Register"|translate}}</ion-title>
       <ion-buttons slot="end">
@@ -7,8 +7,9 @@
         </ion-button>
       </ion-buttons>
     </ion-toolbar>
-  </ion-header>
-  
+  </ion-header> -->
+  <app-header title="Register"></app-header>
+
   <ion-content>
     <img src="/assets/icon/favicon.png" class="logo"/>
  
@@ -16,7 +17,7 @@
           <ion-slides style="width:100%;">
             <ion-slide>
               <ion-card  style="width:100%;" > 
-                <ion-card-header style="text-align: center;">
+                <ion-card-header class="text-center">
                   <ion-card-title>{{"Register"|translate}}</ion-card-title>
                    <ion-card-subtitle>{{"Personal Info"|translate}}</ion-card-subtitle>
                 </ion-card-header>
@@ -141,7 +142,9 @@
                   </div>
                   <ion-label  >{{"Description"|translate}} </ion-label>
                   <ion-textarea formControlName="talent_des"></ion-textarea>  
-                
+                  <div *ngIf="form.controls['talent_des'].invalid && (form.controls['talent_des'].dirty || form.controls['talent_des'].touched)" class="text-danger">
+                    <div *ngIf="form.controls['talent_des'].errors.required">{{"About your talent is required"|translate}}</div>
+                  </div>
                   
                 </div>
 

@@ -1,4 +1,4 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
@@ -12,7 +12,8 @@
       </ion-button>    
     </ion-buttons>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
+<app-header title="Profile"></app-header>
 
 <ion-content>
   <div class="talent-profile">
@@ -24,15 +25,17 @@
         </div>
         <div class="col col-xs-6"></div>
         <div class="col col-xs-3 text-center">      
-          <a class="btn" routerLink="/user-area/application" >{{"Talent"|translate}}</a>
+          <a class="btn" routerLink="/user-area/application" >{{"Status"|translate}}</a>
         </div>
       </div>
     </div>
-    <img class="photo" [src]="data.user?.photo.md"/>
+    <img #personalPhoto class="photo" [src]="data.user?.photo.md"/>
+    <ion-icon class="edit-image" slot="icon-only" name="create" (click)="editImageClick()"></ion-icon>
+
     <div class="details">
       <h2 class="text-center">{{data.user?.name}}</h2>
       <h4 class="text-center"><a>{{data.category?.title}}</a></h4>
-      <p  class="text-center"><span class="city badge text-center">{{data.country?.name}}</span> / {{data.age|number:'2.0-0'}} year</p>
+      <p  class="text-center"><span class="city badge text-center">{{data.country?.name}}</span> / {{data.age|number:'2.0-0'}} {{"Years"|translate}}</p>
        </div>
        <hr/>
       <p>{{data.talent_des}}</p>

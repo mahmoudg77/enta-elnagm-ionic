@@ -1,6 +1,8 @@
+import { environment } from 'src/environments/environment';
 import { AlertService } from './alert/alert.service';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Storage } from '@ionic/storage';
 
 @Injectable({
   providedIn: 'root'
@@ -55,7 +57,7 @@ export class SharedService {
    
   }
   public isRTL:boolean=false;
-  constructor(private alert: AlertService,private router:Router) { }
+  constructor(private alert: AlertService,private router:Router,private storage:Storage) { }
 
   async presentLoading() {
     const loadingController = document.querySelector('ion-loading-controller');
@@ -88,5 +90,14 @@ export class SharedService {
 
 };
 
+getSelectedLanguage():Promise<string>{
+  return this.storage.get(environment.STORAGE_APP_LANG);
+}
+setSelectedLanguage(lang:string):Promise<string>{
+  return this.storage.set(environment.STORAGE_APP_LANG,lang);
+}
 
+  async delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
+  }
 }

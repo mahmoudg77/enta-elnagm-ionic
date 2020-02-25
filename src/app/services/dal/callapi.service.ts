@@ -9,7 +9,7 @@ import { Guid } from 'guid-typescript';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
 import { SharedService } from '../shared.service';
-import { AppVersion } from '@ionic-native/app-version/ngx';
+// import { AppVersion } from '@ionic-native/app-version/ngx';
 import { TranslateService } from '@ngx-translate/core';
 import { LoadingService } from '../loading.service';
 
@@ -25,23 +25,23 @@ export class CallapiService {
     private shared:SharedService,
     private route:Router,
     //private crashlytic:FirebaseCrashlytics,
-    private appVersion:AppVersion,
+    // private appVersion:AppVersion,
     private platform:Platform,
     private translate:TranslateService,
     private load :LoadingService
     ) { 
       //this.crashlytic.initialise();
     //if(!this.platform.is('ios') && !this.platform.is('android')) return;
-    this.getVersion();
+    // this.getVersion();
   }
-  getVersion(){
-    this.appVersion.getVersionNumber().then((ver:string)=>{
-      this.version=ver;
-    });
-    this.appVersion.getPackageName().then(id=>{
-      this.package=id;
-    })
-  }
+  // getVersion(){
+  //   this.appVersion.getVersionNumber().then((ver:string)=>{
+  //     this.version=ver;
+  //   });
+  //   this.appVersion.getPackageName().then(id=>{
+  //     this.package=id;
+  //   })
+  // }
   getToken() {
     let token=localStorage.getItem(environment.tokenKey) || null;
     if(token==null) return null;
@@ -54,7 +54,7 @@ export class CallapiService {
 
     let parms=stringify(pars);
     let headers:HttpHeaders= new HttpHeaders({"X-APP-KEY":environment.apiKey});
-    this.getVersion();
+    // this.getVersion();
     if(this.getToken()!=null ) headers=headers.append("X-TOKEN",this.getToken());
     
     // if(this.version!=null )  headers=headers.append("APP_VER",this.version);
@@ -83,7 +83,7 @@ export class CallapiService {
     this.lang=this.translate.currentLang;
 
     let headers:HttpHeaders= new HttpHeaders({"X-APP-KEY":environment.apiKey});
-    this.getVersion();
+    // this.getVersion();
     if(this.getToken()!=null ) headers=headers.append("X-TOKEN",this.getToken());
     // if(this.version!=null )  headers=headers.append("APP_VER",this.version);
     

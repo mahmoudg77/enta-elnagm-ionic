@@ -1,3 +1,4 @@
+import { TranslateService } from '@ngx-translate/core';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ProfileService } from 'src/app/services/bll/profile.service';
 import { TalentService } from 'src/app/services/bll/talent.service';
@@ -79,7 +80,8 @@ export class ApplicationPage implements OnInit {
     private media: Media,
     private actionSheetController:ActionSheetController,
     private chooser:Chooser,
-    private webview:WebView
+    private webview:WebView,
+    private translate:TranslateService
     ) { }
 
   ionViewWillEnter(){this._ngOnInit();}
@@ -140,22 +142,26 @@ export class ApplicationPage implements OnInit {
       }
 
       async presentActionSheet() {
+        var transs:any={};
+        await this.translate.get(['Upload','Video_Recorder','Voice_Recorder','From_file','Cancel']).subscribe(next=>transs=next);
+      
+      
         const actionSheet = await this.actionSheetController.create({
-          header: 'Upload',
+          header: transs.Upload,
           buttons: [{
-            text: 'Video Recorder',
+            text: transs.Video_Recorder,
             icon: 'videocam',
             handler: () => {
               this.captureVideo();
             }
           }, {
-            text: 'Voice Recorder',
+            text: transs.Voice_Recorder,
             icon: 'microphone',
             handler: () => {
               this.captureAudio();
             }
           }, {
-            text: 'From file',
+            text: transs.From_file,
             icon: 'folder',
             handler: () => {
               this.chosser();
@@ -163,7 +169,7 @@ export class ApplicationPage implements OnInit {
             }
       
           }, {
-            text: 'Cancel',
+            text: transs.Cancel,
             icon: 'close',
             role: 'cancel',
             handler: () => {
@@ -177,17 +183,7 @@ export class ApplicationPage implements OnInit {
 
     this.chooser.getFile(videos.concat(audios).join(","))
     .then((file) =>{
-    //   //console.log(file ? file.name : 'canceled');
-    //  this.storeMediaFiles(file);
-    //  this.fileinput.nativeElement.value=file;
-    //  this.file.resolveLocalFilesystemUrl(file.uri).then(path=>{
-
-    //    //console.log(path);
-    //  })
-    //  //console.log("Chosser:",file);
-    //   this.readFile(file)
-    //   this.attach=file;
-      //console.log(file);
+    
       this.attach={name:file.name,playPath:file.dataURI,dataPath:""};
       this.play(this.attach);
       this.readChoosedFile(file);

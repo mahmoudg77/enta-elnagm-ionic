@@ -1,9 +1,11 @@
+// import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { AlertService } from './../services/alert/alert.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoadingService } from '../services/loading.service';
+ 
 
 @Component({
   selector: 'app-login',
@@ -22,7 +24,9 @@ export class LoginPage implements OnInit,OnDestroy {
     private router:Router,
     private route:ActivatedRoute,
     private alert:AlertService,
-    private load:LoadingService) { 
+    private load:LoadingService,
+    // private inapp:InAppBrowser
+    ) { 
     this.form=this.formBuilder.group({
       email:['',[Validators.required,Validators.email]],
       password:['',[Validators.required,Validators.minLength(6)]],
@@ -54,4 +58,7 @@ export class LoginPage implements OnInit,OnDestroy {
 
   }
  
+  resetPassword(){
+    window.open("https://entaelnegm.com/en/password/reset");
+  }
 }

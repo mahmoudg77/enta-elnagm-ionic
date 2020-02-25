@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import { CallapiService } from './callapi.service';
 
 export class ImageFile{
-  file:File;
+  file:any;
   model:string;
   id:number;
   tag?:string="main";
+  filename:string;
 }
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,10 @@ export class ImageUploaderService {
   upload(img:ImageFile,success_callbak:any,error_callback:any=null){
     const uploadData = new FormData();
    //console.log(this.file);
-    uploadData.append('img', img.file,img.file.name);
+   if(img.filename)
+    uploadData.append('img', img.file,img.filename);
+   else
+    uploadData.append('img', img.file);
 
     this.call.postRequest("/image/upload?model="+img.model+"&model_id="+img.id+"&model_tag="+img.tag,uploadData,
       res=>{
@@ -34,6 +38,24 @@ export class ImageUploaderService {
       }
     )
   }
+  // uploadBinary(img:ImageFile,success_callbak:any,error_callback:any=null){
+  //   const uploadData = new FormData();
+  //  //console.log(this.file);
+  //   uploadData.append('img', img.file);
+
+  //   this.call.postRequest("/image/upload?model="+img.model+"&model_id="+img.id+"&model_tag="+img.tag,uploadData,
+  //     res=>{
+  //       if(success_callbak){
+  //         success_callbak(res);
+  //       }
+  //     },
+  //     error=>{
+  //       if(error_callback){
+  //         error_callback(error);
+  //       }
+  //     }
+  //   )
+  // }
   
   isImageFile(file){      
     let acceptedImageTypes = {'image/png': true,'image/jpeg': true,'image/gif': true};

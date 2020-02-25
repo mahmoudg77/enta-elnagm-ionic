@@ -1,3 +1,4 @@
+import { ComponentsModule } from './../components/components.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -16,7 +17,8 @@ import { TranslateModule } from '@ngx-translate/core';
     IonicModule,
     ForgetpasswordPageRoutingModule,
     ReactiveFormsModule,
-    TranslateModule
+    TranslateModule,
+    ComponentsModule
 
   ],
   declarations: [ForgetpasswordPage]
