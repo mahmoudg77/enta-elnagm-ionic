@@ -9,6 +9,7 @@ import { RegisterPageRoutingModule } from './register-routing.module';
 
 import { RegisterPage } from './register.page';
 import { TranslateModule } from '@ngx-translate/core';
+import { IonicSelectableModule } from 'ionic-selectable';
 
 @NgModule({
   imports: [
@@ -18,7 +19,9 @@ import { TranslateModule } from '@ngx-translate/core';
     RegisterPageRoutingModule,
     ReactiveFormsModule,
     TranslateModule,
-    ComponentsModule
+    ComponentsModule,
+    IonicSelectableModule
+
 
   ],
   declarations: [RegisterPage]

@@ -19,6 +19,10 @@ import { PostService } from './bll/articles.service';
 import { ValidationService } from './validation.service';
 import { FileTransfer} from '@ionic-native/file-transfer/ngx';
 import { File } from '@ionic-native/file/ngx';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireModule } from '@angular/fire';
+import { Facebook } from '@ionic-native/facebook/ngx';
+import { environment } from 'src/environments/environment';
 
 
 
@@ -26,7 +30,9 @@ import { File } from '@ionic-native/file/ngx';
   declarations: [],
   imports: [
     CommonModule,
-    AlertModule
+    AlertModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAuthModule
   ],
   providers:[
     AppVersion,
@@ -45,7 +51,8 @@ import { File } from '@ionic-native/file/ngx';
     PostService,
     ValidationService,
     FileTransfer,
-    File
+    File,
+    Facebook,
   ]
 })
 export class MyservicesModule { }

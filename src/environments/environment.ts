@@ -22,8 +22,8 @@ export const environment = {
   },
   apiKey:"BkMId5al9ETygAeWJ8u6iCjNDvszwmf4cKVHUYZ3nb2Sr0hFpOPq7XLG1QxtoR",
   // apiUrl:"http://localhost:8000",
-  apiUrl:"https://entaelnegm.com",
-  version:'1.0.1'
+  apiUrl:"https://demo.entaelnegm.com",
+  version:'1.0.3'
 };
 
 /*

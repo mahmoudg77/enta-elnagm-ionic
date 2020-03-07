@@ -16,7 +16,7 @@ export class LoadingService {
     return await this.loadingController.create({
         message:message,
         duration: 15000,
-        spinner: 'dots',
+        //spinner: 'dots',
     }).then(a => {
       a.present().then(() => {
         // console.log('presented');

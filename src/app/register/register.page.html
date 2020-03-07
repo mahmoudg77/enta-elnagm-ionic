@@ -12,9 +12,12 @@
 
   <ion-content>
     <img src="/assets/icon/favicon.png" class="logo"/>
- 
+ <!-- <ion-button (click)="loginByFacebook()">
+   <ion-icon slot="start" name="facebook"></ion-icon>
+   Facebook
+ </ion-button> -->
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
-          <ion-slides style="width:100%;">
+          <ion-slides [options]="sliderOptions" style="width:100%;">
             <ion-slide>
               <ion-card  style="width:100%;" > 
                 <ion-card-header class="text-center">
@@ -22,43 +25,55 @@
                    <ion-card-subtitle>{{"Personal Info"|translate}}</ion-card-subtitle>
                 </ion-card-header>
                 <ion-card-content >
-                    <ion-label>{{"Your Name"|translate}} <ion-text color="danger">*</ion-text></ion-label>
-                    <ion-input required formControlName="name" type="text"  class="form-control"></ion-input>
+                  <ion-item>
+                     <ion-label position="floating"><ion-text color="light">{{"Your Name"|translate}}</ion-text> <ion-text color="danger">*</ion-text></ion-label>
+                    <ion-input required formControlName="name" type="text"  ></ion-input>
+                  </ion-item>
                     <div *ngIf="form.controls['name'].invalid && (form.controls['name'].dirty || form.controls['name'].touched)" class="text-danger">
                       <div *ngIf="form.controls['name'].errors.required">{{"Your name is required"|translate}}</div>
-                      <div *ngIf="form.controls['name'].errors.minLength">{{"Your name is too small"|translate}}</div>
+                      <div *ngIf="form.controls['name'].errors.minlength">{{"Your name is too small"|translate}}</div>
                       <div *ngIf="form.controls['name'].errors.pattern">{{"Invalid Name"|translate}}</div>
                     </div>
                   
-                    <ion-label>{{"Your phone"|translate}} <ion-text color="danger">*</ion-text></ion-label>
-                    <ion-input required formControlName="phone" type="text" inputmode="tel"  class="form-control"></ion-input>
+                    <ion-item>
+                      <ion-label position="floating"><ion-text color="light">{{"Your phone"|translate}} </ion-text><ion-text color="danger">*</ion-text></ion-label>
+                    <ion-input required formControlName="phone" type="text" inputmode="tel"  ></ion-input>
+                    </ion-item>
                     <div *ngIf="form.controls['phone'].invalid && (form.controls['phone'].dirty || form.controls['phone'].touched)" class="text-danger">
                       <div *ngIf="form.controls['phone'].errors.required">{{"Your phone is required"|translate}}</div>
-                      <div *ngIf="form.controls['phone'].errors.minLength">{{"Your phone is too small"|translate}}</div>
-                      <div *ngIf="form.controls['phone'].errors.maxLength">{{"Must less than 16 numeric"|translate}}</div>
+                      <div *ngIf="form.controls['phone'].errors.minlength">{{"Your phone is too small"|translate}}</div>
+                      <div *ngIf="form.controls['phone'].errors.maxlength">{{"Must less than 16 numeric"|translate}}</div>
+                      <div *ngIf="form.controls['phone'].errors.pattern">{{"Invalid phone number"|translate}}</div>
                     </div>
                
-                    <ion-label>{{"Your email"|translate}} <ion-text color="danger">*</ion-text></ion-label>
-                    <ion-input required formControlName="email" type="text"  class="form-control"></ion-input>
+                    <ion-item>
+                      <ion-label position="floating"><ion-text color="light">{{"Your email"|translate}} </ion-text><ion-text color="danger">*</ion-text></ion-label>
+                    <ion-input required formControlName="email" type="text" ></ion-input>
+                    </ion-item>
                     <div *ngIf="form.controls['email'].invalid && (form.controls['email'].dirty || form.controls['email'].touched)" class="text-danger">
                       <div *ngIf="form.controls['email'].errors.required">{{"Email is required"|translate}}</div>
                       <div *ngIf="form.controls['email'].errors.email">{{"Invalid Email"|translate}}</div>
                     </div>
                 
-                <ion-label  >{{"Password"|translate}} <ion-text color="danger">*</ion-text></ion-label>
-                <ion-input required formControlName="password" type="password" class="form-control"></ion-input>
+                    <ion-item>
+                      <ion-label position="floating"><ion-text color="light">{{"Password"|translate}} </ion-text><ion-text color="danger">*</ion-text></ion-label>
+                <ion-input required formControlName="password" type="password" ></ion-input>
+                
+                </ion-item>
                 <div *ngIf="form.controls['password'].invalid && (form.controls['password'].dirty || form.controls['password'].touched)" class="text-danger">
                   <div *ngIf="form.controls['password'].errors.required">{{"Password is required"|translate}}</div>
-                  <div *ngIf="form.controls['password'].errors.minLength">{{"Too small password"|translate}}</div>
+                  <div *ngIf="form.controls['password'].errors.minlength">{{"Too small password"|translate}}</div>
                 </div>
-                 <ion-label  >{{"Confirm Password"|translate}} <ion-text color="danger">*</ion-text></ion-label>
-                <ion-input required formControlName="password_confirmation" type="password" class="form-control"></ion-input>
+                <ion-item>
+                  <ion-label position="floating"><ion-text color="light">{{"Confirm Password"|translate}} </ion-text><ion-text color="danger">*</ion-text></ion-label>
+                <ion-input required formControlName="password_confirmation" type="password" ></ion-input>
+                </ion-item>
                 <div *ngIf="form.controls['password_confirmation'].invalid && (form.controls['password_confirmation'].dirty || form.controls['password_confirmation'].touched)" class="text-danger">
                   <div *ngIf="form.controls['password_confirmation'].errors.required">{{"Confirm password is required"|translate}}</div>
                   <div *ngIf="form.controls['password_confirmation'].errors.confirm">{{"Confirm password not matches"|translate}}</div>
 
                 </div>
-                <ion-button expand="full" [disabled]="form.controls['name'].invalid  || form.controls['phone'].invalid || form.controls['email'].invalid || form.controls['password'].invalid  || form.controls['password_confirmation'].invalid " (click)="next()">
+                <ion-button expand="full" [disabled]="form.controls['name'].invalid  || form.controls['phone'].invalid || form.controls['email'].invalid || form.controls['password'].invalid  || form.controls['password_confirmation'].invalid "  (click)="next()">
                   {{"Next"|translate}}
                 <ion-icon slot="end" name="arrow-forward"></ion-icon>
 
@@ -73,29 +88,73 @@
                 </ion-card-header>
                 <ion-card-content>
                <div  style="width:100%">
-                <ion-label  >{{"Nationality"|translate}} <ion-text color="danger">*</ion-text></ion-label>
-                <ion-select multiple="false" required formControlName="nationality" placeholder="{{'Select One'|translate}} ..." class="form-control">
-                 <ion-select-option *ngFor="let itm of countries" [value]="itm.id">{{itm.name}}</ion-select-option>
-                </ion-select>
+                <!-- <ion-select (ionChange)="form.controls['country'].setValue(form.controls['nationality'].value)" multiple="false" required formControlName="nationality" placeholder="{{'Select One'|translate}} ..." class="form-control">
+                  <ion-select-option *ngFor="let itm of countries" [value]="itm.id">{{itm.name}}</ion-select-option>
+                </ion-select> -->
+                <ion-item>
+                  <ion-label position="floating"  >{{"Nationality"|translate}} <ion-text color="danger">*</ion-text></ion-label>
+                  <ionic-selectable
+                  formControlName="nationality"
+                  itemValueField="id"
+                  itemTextField="name"
+                  [items]="countries"
+                  [canSearch]="true"
+                  (onChange)="form.controls['country'].setValue(form.controls['nationality'].value);onCountryChange($event)" 
+                  >
+                  
+                </ionic-selectable>
+                </ion-item>
+                 
+ 
+
                 <div *ngIf="form.controls['nationality'].invalid && (form.controls['nationality'].dirty || form.controls['nationality'].touched)" class="text-danger">
                   <div *ngIf="form.controls['nationality'].errors.required">{{"Nationality is required"|translate}}</div>
                 </div>
-                <ion-label  >{{"Country"|translate}} <ion-text color="danger">*</ion-text></ion-label>
+                <ion-item>
+                  <ion-label position="floating">{{"Country"|translate}} <ion-text color="danger">*</ion-text></ion-label>
+                  <ionic-selectable
+                  formControlName="country"
+                  itemValueField="id"
+                  itemTextField="name"
+                  [items]="countries"
+                  [canSearch]="true"
+                  (onChange)="onCountryChange($event)" 
+                  >
+                  
+                </ionic-selectable>
+                </ion-item>
+                <!-- <ion-label  >{{"Country"|translate}} <ion-text color="danger">*</ion-text></ion-label>
                 <ion-select multiple="false"  (ionChange)="onCountryChange()" required formControlName="country" placeholder="{{'Select One'|translate}} ..." class="form-control">
                   <ion-select-option *ngFor="let itm of countries" [value]="itm.id">{{itm.name}}</ion-select-option>
                 </ion-select>
                 <div *ngIf="form.controls['country'].invalid && (form.controls['country'].dirty || form.controls['country'].touched)" class="text-danger">
                   <div *ngIf="form.controls['country'].errors.required">{{"Country is required"|translate}}</div>
-                </div>
-                <ion-label  >{{"City"|translate}} <ion-text color="danger">*</ion-text></ion-label>
+                </div> -->
+                <!-- <ion-label  >{{"City"|translate}} <ion-text color="danger">*</ion-text></ion-label>
                 <ion-select multiple="false" required formControlName="city_id" placeholder="{{'Select One'|translate}} ..." class="form-control">
                   <ion-select-option *ngFor="let itm of cities" [value]="itm.id">{{itm.name}}</ion-select-option>
                 </ion-select>
                 <div *ngIf="form.controls['city_id'].invalid && (form.controls['city_id'].dirty || form.controls['city_id'].touched)" class="text-danger">
                   <div *ngIf="form.controls['city_id'].errors.required">{{"City is required"|translate}}</div>
                 </div>
-                <ion-label  >{{"Address"|translate}} <ion-text color="danger">*</ion-text></ion-label>
-                <ion-textarea required formControlName="address" ></ion-textarea>
+                 -->
+                 <ion-item>
+                  <ion-label position="floating">{{"City"|translate}} <ion-text color="danger"></ion-text></ion-label>
+                  <ionic-selectable
+                  formControlName="city_id"
+                  itemValueField="id"
+                  itemTextField="name"
+                  [items]="cities"
+                  [canSearch]="true"
+                  
+                  >
+                  
+                </ionic-selectable>
+                </ion-item>
+                <ion-item>
+                  <ion-label  position="floating" ><ion-text color="light">{{"Address"|translate}}</ion-text> <ion-text color="danger">*</ion-text></ion-label>
+                  <ion-textarea required type="text" formControlName="address"></ion-textarea>
+                </ion-item>
                 <div *ngIf="form.controls['address'].invalid && (form.controls['address'].dirty || form.controls['address'].touched)" class="text-danger">
                   <div *ngIf="form.controls['address'].errors.required">{{"Address is required"|translate}}</div>
                 </div>
@@ -127,21 +186,30 @@
                 </ion-card-header>
                 <ion-card-content  >
                 <div  style="width:100%">
-                  <ion-label  >{{"Date Of Birth"|translate}} <ion-text color="danger">*</ion-text></ion-label>
-                  <ion-input type="date" formControlName="birthdate" class="form-control" ></ion-input>  
-                  <div *ngIf="form.controls['birthdate'].invalid && (form.controls['birthdate'].dirty || form.controls['birthdate'].touched)" class="text-danger">
+                  
+                  <ion-item>
+                    <ion-label position="fixed">{{"Date Of Birth"|translate}} <ion-text color="danger">*</ion-text></ion-label>
+                  
+                    <ion-input type="date" formControlName="birthdate" ></ion-input>  
+                  </ion-item>
+                    <div *ngIf="form.controls['birthdate'].invalid && (form.controls['birthdate'].dirty || form.controls['birthdate'].touched)" class="text-danger">
                     <div *ngIf="form.controls['birthdate'].errors.required">{{"Birth date is required"|translate}}</div>
                   </div>
-  
-                  <ion-label  >{{"Your talent"|translate}} <ion-text color="danger">*</ion-text></ion-label>
-                  <ion-select multiple="false" required formControlName="category_id" placeholder="{{'Select One'|translate}} ..." class="form-control">
+                  <ion-item>
+                    <ion-label position="floating">
+                   {{"Your talent"|translate}} <ion-text color="danger">*</ion-text></ion-label>
+                  <ion-select multiple="false" required formControlName="category_id" placeholder="{{'Select One'|translate}} ..." >
                     <ion-select-option *ngFor="let itm of categories" [value]="itm.id">{{itm.title}}</ion-select-option>
                   </ion-select>
+                 </ion-item>
                   <div *ngIf="form.controls['category_id'].invalid && (form.controls['category_id'].dirty || form.controls['category_id'].touched)" class="text-danger">
                     <div *ngIf="form.controls['category_id'].errors.required">{{"Talent is required"|translate}}</div>
                   </div>
-                  <ion-label  >{{"Description"|translate}} </ion-label>
+
+                   <ion-item>
+                     <ion-label position="floating">{{"Description"|translate}} </ion-label>
                   <ion-textarea formControlName="talent_des"></ion-textarea>  
+                   </ion-item>
                   <div *ngIf="form.controls['talent_des'].invalid && (form.controls['talent_des'].dirty || form.controls['talent_des'].touched)" class="text-danger">
                     <div *ngIf="form.controls['talent_des'].errors.required">{{"About your talent is required"|translate}}</div>
                   </div>
@@ -153,7 +221,7 @@
                 <div class="col col-xs-6">
                   <ion-button  expand="full"   (click)="back()">
                     <ion-icon slot="start" name="arrow-back"></ion-icon>
-                  {{"back"|translate}}
+                  {{"Back"|translate}}
                 </ion-button>
               </div>
                 <div class="col col-xs-6">
@@ -176,22 +244,22 @@
                <div  style="width:100%">
                 <div class="row">
                   <div class="col col-xs-6">
-                    <ion-label  >{{"Personal Photo"|translate}} <ion-text color="danger">*</ion-text></ion-label>
+                    <ion-label  >{{"Personal Photo"|translate}} <ion-text color="danger"></ion-text></ion-label>
                     <label class="img-upload">
                       <input type="file"  (change)="onUserImageChange($event)"  formControlName="img_user">  
                     </label>
                     <div *ngIf="form.controls['img_user'].invalid && (form.controls['img_user'].dirty || form.controls['img_user'].touched)" class="text-danger">
-                      <div *ngIf="form.controls['img_user'].errors.required">{{"Talent is required"|translate}}</div>
+                      <div *ngIf="form.controls['img_user'].errors.required">{{"Personal Photo is required"|translate}}</div>
                     </div>
                   </div>
                   <div class="col col-xs-6">
-                    <ion-label  >{{"ID Image"|translate}} <ion-text color="danger">*</ion-text></ion-label>
+                    <ion-label  >{{"ID Image"|translate}} <ion-text color="danger"></ion-text></ion-label>
                     
                     <label  class="img-upload">
                       <input type="file" (change)="onIDImageChange($event)" formControlName="img_id_no">  
                     </label>
                     <div *ngIf="form.controls['img_id_no'].invalid && (form.controls['img_id_no'].dirty || form.controls['img_id_no'].touched)" class="text-danger">
-                      <div *ngIf="form.controls['img_id_no'].errors.required">{{"Talent is required"|translate}}</div>
+                      <div *ngIf="form.controls['img_id_no'].errors.required">{{"ID Image is required"|translate}}</div>
                     </div>
                   </div>
                 </div>
@@ -200,7 +268,7 @@
                   <div class="col col-xs-6">
                     <ion-button  expand="full"   (click)="back()">
                       <ion-icon slot="start" name="arrow-back"></ion-icon>
-                    {{"back"|translate}}
+                    {{"Back"|translate}}
                   </ion-button>
                 </div>
                   <div class="col col-xs-6">

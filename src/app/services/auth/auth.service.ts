@@ -197,5 +197,15 @@ export class AuthService {
             }
         );
     }
+
+    loginFirebaseFacebook():Promise<any>{
+
+      const prov=new firebase.auth.FacebookAuthProvider();
+
+      firebase.auth().signInWithPopup(prov).then(credential=>{
+        console.log(credential);
+      })
+      return null;
+    }
     
 }

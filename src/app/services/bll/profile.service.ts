@@ -23,6 +23,9 @@ export class ProfileService {
   getProfile(id,next:any=null,error:any=null){
     this.api.getRequest("/profile/"+id,{},data=>{if(next)next(data);},err=>{if(error)error(err);});
   }
+  resendVerifyMail(next:any=null,error:any=null){
+       this.api.postRequest("/profile/resendVerify",{},data=>{if(next)next(data);},err=>{if(error)error(err);});
+   }
  
   uploadProfileImage(file,next:any=null,error:any=null){
     console.log(file);

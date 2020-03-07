@@ -85,6 +85,7 @@ export class AppComponent implements OnInit {
               this.shared.isRTL=v=='rtl';
               if(this.shared.isRTL) {
                 require("style-loader!./../theme/bootstrap-rtl.min.scss");
+                require("style-loader!./../theme/style-rtl.scss");
               }
             }
             );

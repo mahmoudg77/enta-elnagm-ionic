@@ -9,7 +9,7 @@ import { MediaCapture, CaptureVideoOptions, CaptureAudioOptions } from '@ionic-n
 import { Media } from '@ionic-native/media/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { Storage } from '@ionic/storage';
-import { ActionSheetController } from '@ionic/angular';
+import { ActionSheetController, ToastController } from '@ionic/angular';
 import { Chooser } from '@ionic-native/chooser/ngx';
 import { HttpEventType } from '@angular/common/http';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
@@ -81,7 +81,8 @@ export class ApplicationPage implements OnInit {
     private actionSheetController:ActionSheetController,
     private chooser:Chooser,
     private webview:WebView,
-    private translate:TranslateService
+    private translate:TranslateService,
+    private toaster:ToastController
     ) { }
 
   ionViewWillEnter(){this._ngOnInit();}
@@ -91,10 +92,23 @@ export class ApplicationPage implements OnInit {
       this.data=data;
       this.talent.getMyStatus(next=>{
         this.status=next;
+      },error=>{
+
       })
       //if(this.data.user.talent_file!=null)this.video=this.domSanitizer.bypassSecurityTrustResourceUrl(this.data.user.talent_file);
     }
   );
+  }
+  resendEmail(){
+    this.profile.resendVerifyMail(next=>{
+      
+        // var t=this.toaster.create({message:next.message,duration:2000}).then(d=>{
+        //   d.present();
+        // });
+        this.status.message=next;
+        
+       
+    })
   }
   onSubmit(){
     this.submitted=true;

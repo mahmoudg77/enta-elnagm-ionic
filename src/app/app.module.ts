@@ -38,7 +38,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     IonicStorageModule.forRoot(),
     MyservicesModule,
     ReactiveFormsModule,
-    ComponentsModule
+    ComponentsModule,
   ],
   providers: [
     Globalization,

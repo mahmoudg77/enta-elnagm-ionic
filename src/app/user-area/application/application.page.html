@@ -40,11 +40,14 @@
             [class.fa-info-circle]="status.status==2" 
             [class.fa-times]="status.status==3" 
             [class.fa-thumbs-up]="status.status==1" 
+            [class.fa-at]="status.status==-2" 
             ></i>
           </h3>
           
-          <p class="text-center" >{{status.name}}</p>
-          <p class="text-center" >{{status.message}}</p>
+          <p class="text-center" style="text-align: center; color: #000;" >{{status.name}}</p>
+          <p class="text-center" style="text-align: center; color: #000;" >{{status.message}}</p>
+          <p class="text-center" *ngIf="status.status==-2" ><a style="width:100%" (click)="resendEmail()" class="btn btn-primary">اعد ارسال رسالة التفعيل</a></p>
+
         </ion-card-content>
       </ion-card>
       <ion-card *ngIf="status.status==-1 || status.status==2">

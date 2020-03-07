@@ -163,6 +163,8 @@ export class CallapiService {
         this.route.navigate(['/','login']);
       }else if(error.code==401){
         this.shared.redirectToError(error.message);
+      // }else if(error.code==201){
+      //   this.shared.error(error.message);
       }else{
         this.shared.error(error.message);
       }
